@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_maps_fragment">Hello maps fragment</string>
+    <string name="start_button">start</string>
+    <string name="operations_et_hint">Operations</string>
+    <string name="threads_et_hint">Threads</string>
+    <string name="adding_to_start_in_arraylist_tv">Adding to start in ArrayList: N/A ms</string>
+    <string name="adding_to_start_in_linkedlist_tv">Adding to start in LinkedList: N/A ms</string>
+    <string name="adding_to_start_in_copyonwritearraylist_tv">Adding to start in CopyOnWriteArrayList: N/A ms</string>
+    <string name="adding_to_middle_of_arraylist_tv">Adding to middle of ArrayList: N/A ms</string>
+    <string name="adding_to_middle_of_linkedlist_tv">Adding to middle of LinkedList: N/A ms</string>
+    <string name="adding_to_middle_of_copyonwritearraylist_tv">Adding to middle of CopyOnWriteArrayList: N/A ms</string>
+    <string name="adding_to_end_of_arraylist_tv">Adding to end of ArrayList: N/A ms</string>
+    <string name="adding_to_end_of_linkedlist_tv">Adding to end of LinkedList: N/A ms</string>
+    <string name="adding_to_end_of_copyonwritearraylist_tv">Adding to end of CopyOnWriteArrayList: N/A ms</string>
+</resources>

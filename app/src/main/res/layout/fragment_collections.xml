@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".fragments.CollectionsFragment">
+
+    <Button
+        android:id="@+id/btn_start_collections"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/start_button"
+        app:layout_constraintBottom_toTopOf="@+id/sv_collections"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_operation_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/operations_et_hint"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_threads_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/threads_et_hint"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_operation_number" />
+
+    <ScrollView
+        android:id="@+id/sv_collections"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_threads_number">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_inside_collection"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <ProgressBar
+                android:id="@+id/pb_add_to_start_arraylist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/tv_add_to_start_arraylist"
+                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_start_arraylist"
+                app:layout_constraintTop_toTopOf="@+id/tv_add_to_start_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_start_arraylist"/>
+
+            <TextView
+                android:id="@+id/tv_add_to_start_arraylist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_start_in_arraylist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_start_linkedlist"
+                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
+                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+
+            <TextView
+                android:id="@+id/tv_add_to_start_linkedlist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_start_in_linkedlist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_start_cow_arraylist"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_start_arraylist"
+                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+
+            <TextView
+                android:id="@+id/tv_add_to_start_cow_arraylist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_start_in_copyonwritearraylist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_start_linkedlist"
+                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+
+            <TextView
+                android:id="@+id/tv_add_to_middle_arraylist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_middle_of_arraylist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_middle_linkedlist"
+                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist" />
+
+            <TextView
+                android:id="@+id/tv_add_to_middle_linkedlist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_middle_of_linkedlist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_middle_cow_arraylist"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_middle_arraylist"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist" />
+
+            <TextView
+                android:id="@+id/tv_add_to_middle_cow_arraylist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_middle_of_copyonwritearraylist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_middle_linkedlist"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist" />
+
+            <TextView
+                android:id="@+id/tv_add_to_end_arraylist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_end_of_arraylist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_end_linkedlist"
+                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist" />
+
+            <TextView
+                android:id="@+id/tv_add_to_end_linkedlist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_end_of_linkedlist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_end_cow_arraylist"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_end_arraylist"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist" />
+
+            <TextView
+                android:id="@+id/tv_add_to_end_cow_arraylist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/adding_to_end_of_copyonwritearraylist_tv"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_end_linkedlist"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
