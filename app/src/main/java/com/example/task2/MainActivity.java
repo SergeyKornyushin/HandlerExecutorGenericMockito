@@ -16,14 +16,13 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding activityMainBinding;
     TabLayout tabLayout;
     ViewPager2 viewPager2;
-    FragmentAdapter adapter;
+    private FragmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = activityMainBinding.getRoot();
-        setContentView(view);
+        setContentView(activityMainBinding.getRoot());
 
         tabLayout = activityMainBinding.tabLayout;
         viewPager2 = activityMainBinding.vPager;
