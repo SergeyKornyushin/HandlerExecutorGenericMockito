@@ -1,11 +1,14 @@
+/*
 package com.example.task2.view_models;
 
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -13,33 +16,28 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class CollectionsFragmentViewModel extends ViewModel {
+    public MutableLiveData<List<CollectionsFragmentViewModel>> listMutableLiveData = new MutableLiveData<>();
     public static ArrayList<String> arrayList = new ArrayList<>();
     public static MutableLiveData<String> addToStartArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> addToStartArraylistProgress = new MutableLiveData<>();
     public static MutableLiveData<String> addToMiddleArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> addToMiddleArraylistProgress = new MutableLiveData<>();
     public static MutableLiveData<String> addToEndArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> addToEndArraylistProgress = new MutableLiveData<>();
     public static MutableLiveData<String> searchInArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> searchInArraylistProgress = new MutableLiveData<>();
     public static MutableLiveData<String> removeStartArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> removeStartArraylistProgress = new MutableLiveData<>();
     public static MutableLiveData<String> removeMiddleArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> removeMiddleArraylistProgress = new MutableLiveData<>();
     public static MutableLiveData<String> removeEndArraylistResult = new MutableLiveData<>();
-    public static MutableLiveData<Integer> removeEndArraylistProgress = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> creationArray = new MutableLiveData<>();
 
     public void startThreads() throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
         executorService.submit(new CreateLists());
-        addToStartArraylistProgress.setValue(0);
-        addToMiddleArraylistProgress.setValue(0);
-        addToEndArraylistProgress.setValue(0);
-        searchInArraylistProgress.setValue(0);
-        removeStartArraylistProgress.setValue(0);
-        removeMiddleArraylistProgress.setValue(0);
-        removeEndArraylistProgress.setValue(0);
+//        addToStartArraylistResult.setValue("0");
+//        addToMiddleArraylistResult.setValue("0");
+//        addToEndArraylistResult.setValue("0");
+//        searchInArraylistResult.setValue("0");
+//        removeStartArraylistResult.setValue("0");
+//        removeMiddleArraylistResult.setValue("0");
+//        removeEndArraylistResult.setValue("0");
         executorService.submit(new AddToStartArraylist());
         executorService.submit(new AddToMiddleArraylist());
         executorService.submit(new AddToEndArraylist());
@@ -47,19 +45,20 @@ public class CollectionsFragmentViewModel extends ViewModel {
         executorService.submit(new RemoveStartArraylist());
         executorService.submit(new RemoveMiddleArraylist());
         executorService.submit(new RemoveEndArraylist());
-
         executorService.shutdown();
     }
 
 
-    static class CreateLists implements Runnable {
+    static class CreateLists implements Callable {
         @Override
-        public void run() {
+        public String call() {
             if (arrayList.size() < 999000) {
                 for (int i = 0; i < 1000001; i++) {
                     arrayList.add(i + "");
                 }
             }
+            creationArray.postValue(true);
+            return "ready";
         }
     }
 
@@ -78,7 +77,6 @@ public class CollectionsFragmentViewModel extends ViewModel {
 
             addToStartArraylistResult.postValue("Adding to start in ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            addToStartArraylistProgress.postValue(1);
         }
     }
 
@@ -96,7 +94,6 @@ public class CollectionsFragmentViewModel extends ViewModel {
             arrayList.add(arrayList.size() / 2, "123");
             addToMiddleArraylistResult.postValue("Adding to middle of ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            addToMiddleArraylistProgress.postValue(1);
         }
     }
 
@@ -112,9 +109,8 @@ public class CollectionsFragmentViewModel extends ViewModel {
             }
             double timeAtStart = System.nanoTime();
             arrayList.add(arrayList.size(), "123");
-            addToEndArraylistResult.postValue("Adding to end of ArrayList: \n"
+            addToEndArraylistResult.postValue("Adding to start of ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            addToEndArraylistProgress.postValue(1);
         }
     }
 
@@ -134,7 +130,6 @@ public class CollectionsFragmentViewModel extends ViewModel {
             }
             searchInArraylistResult.postValue("Search in ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            searchInArraylistProgress.postValue(1);
         }
     }
 
@@ -152,7 +147,6 @@ public class CollectionsFragmentViewModel extends ViewModel {
             arrayList.remove(0);
             removeStartArraylistResult.postValue("Removing from start of ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            removeStartArraylistProgress.postValue(1);
         }
     }
 
@@ -170,7 +164,6 @@ public class CollectionsFragmentViewModel extends ViewModel {
             arrayList.remove(arrayList.size() / 2);
             removeMiddleArraylistResult.postValue("Removing from middle of ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            removeMiddleArraylistProgress.postValue(1);
         }
     }
 
@@ -188,10 +181,10 @@ public class CollectionsFragmentViewModel extends ViewModel {
             arrayList.remove(arrayList.size() - 1);
             removeEndArraylistResult.postValue("Removing from end of ArrayList: \n"
                     + ((System.nanoTime() - timeAtStart) / 1_000_000.0) + " ms");
-            removeEndArraylistProgress.postValue(1);
         }
 
     }
 
 }
 
+*/

@@ -67,7 +67,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_add_to_start_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+                app:layout_constraintTop_toTopOf="@+id/pb_add_to_start_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/pb_add_to_start_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_add_to_start_linkedlist"
@@ -88,7 +89,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_add_to_start_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_add_to_start_arraylist"
-                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+                app:layout_constraintTop_toTopOf="@+id/pb_add_to_start_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/pb_add_to_start_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_add_to_start_cow_arraylist"
@@ -130,7 +132,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_add_to_middle_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_add_to_middle_linkedlist"
@@ -151,7 +154,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_add_to_middle_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_add_to_middle_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_add_to_middle_cow_arraylist"
@@ -193,7 +197,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_add_to_end_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_add_to_end_linkedlist"
@@ -214,7 +219,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_add_to_end_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_add_to_end_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_add_to_end_cow_arraylist"
@@ -256,7 +262,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_search_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_search_linkedlist"
@@ -277,7 +284,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_search_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_search_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_search_cow_arraylist"
@@ -287,7 +295,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_search_cow_arraylist"
                 app:layout_constraintEnd_toEndOf="@+id/tv_search_cow_arraylist"
                 app:layout_constraintTop_toTopOf="@+id/tv_search_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist"/>
+                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist" />
 
             <TextView
                 android:id="@+id/tv_search_cow_arraylist"
@@ -319,7 +327,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_remove_start_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_remove_start_linkedlist"
@@ -340,7 +349,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_remove_start_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_remove_start_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_remove_start_cow_arraylist"
@@ -382,7 +392,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_remove_middle_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_remove_middle_linkedlist"
@@ -403,7 +414,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_remove_middle_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_remove_middle_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_remove_middle_cow_arraylist"
@@ -445,7 +457,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_remove_end_linkedlist"
                 app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_remove_end_linkedlist"
@@ -466,7 +479,8 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/tv_remove_end_cow_arraylist"
                 app:layout_constraintStart_toEndOf="@id/tv_remove_end_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_cow_arraylist"/>
 
             <ProgressBar
                 android:id="@+id/pb_remove_end_cow_arraylist"

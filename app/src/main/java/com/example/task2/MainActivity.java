@@ -5,8 +5,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.task2.adapter.FragmentAdapter;
 import com.example.task2.databinding.ActivityMainBinding;
@@ -57,5 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
+
+
     }
+
+
+
+
 }
