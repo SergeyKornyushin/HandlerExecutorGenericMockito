@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Task2</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_maps_fragment">Hello maps fragment</string>
     <string name="start_button">start</string>
     <string name="operations_et_hint">Operations</string>
     <string name="threads_et_hint">Threads</string>
-    <string name="adding_to_start_in_arraylist_tv">Adding to start in ArrayList: N/A ms</string>
+    <string name="adding_to_start_in_arraylist_tv">Adding to start of ArrayList: N/A ms</string>
     <string name="adding_to_start_in_linkedlist_tv">Adding to start in LinkedList: N/A ms</string>
     <string name="adding_to_start_in_copyonwritearraylist_tv">Adding to start in CopyOnWriteArrayList: N/A ms</string>
     <string name="adding_to_middle_of_arraylist_tv">Adding to middle of ArrayList: N/A ms</string>
@@ -14,4 +13,24 @@
     <string name="adding_to_end_of_arraylist_tv">Adding to end of ArrayList: N/A ms</string>
     <string name="adding_to_end_of_linkedlist_tv">Adding to end of LinkedList: N/A ms</string>
     <string name="adding_to_end_of_copyonwritearraylist_tv">Adding to end of CopyOnWriteArrayList: N/A ms</string>
+    <string name="search_in_arraylist">Search in ArrayList: N/A ms</string>
+    <string name="search_in_linkedlist">Search in LinkedList: N/A ms</string>
+    <string name="search_in_copyonwritearraylist">Search in CopyOnWriteArrayList: N/A ms</string>
+    <string name="removing_from_start_of_arraylist">Removing from start of ArrayList: N/A ms</string>
+    <string name="removing_from_start_of_linkedlist">Removing from start of LinkedList: N/A ms</string>
+    <string name="removing_from_start_of_copyonwritearraylist">Removing from start of CopyOnWriteArrayList: N/A ms</string>
+    <string name="removing_from_middle_of_arraylist">Removing from middle of ArrayList: N/A ms</string>
+    <string name="removing_from_middle_of_linkedlist">Removing from middle of LinkedList: N/A ms</string>
+    <string name="removing_from_middle_of_copyonwritearraylist">Removing from middle of CopyOnWriteArrayList: N/A ms</string>
+    <string name="removing_from_end_of_arraylist">Removing from end of ArrayList: N/A ms</string>
+    <string name="removing_from_end_of_linkedlist">Removing from end of LinkedList: N/A ms</string>
+    <string name="removing_from_end_of_copyonwritearraylist">Removing from end of CopyOnWriteArrayList: N/A ms</string>
+    <string name="adding_to_treemap">Adding to TreeMap: N/A ms</string>
+    <string name="adding_to_hashmap">Adding to HashMap: N/A ms</string>
+    <string name="search_in_treemap">Search in TreeMap: N/A ms</string>
+    <string name="search_in_hashmap">Search in HashMap: N/A ms</string>
+    <string name="removing_from_treemap">Removing from TreeMap: N/A ms</string>
+    <string name="removing_from_hashmap">Removing from HashMap: N/A ms</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

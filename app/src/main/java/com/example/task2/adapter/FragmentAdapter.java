@@ -7,9 +7,12 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.task2.fragments.CollectionsFragment;
+import com.example.task2.fragments.IMainActivity;
 import com.example.task2.fragments.MapsFragment;
 
-public class FragmentAdapter extends FragmentStateAdapter {
+public class FragmentAdapter extends FragmentStateAdapter implements IMainActivity {
+    CollectionsFragment collectionsFragment;
+
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
@@ -26,5 +29,10 @@ public class FragmentAdapter extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         return 2;
+    }
+
+    @Override
+    public void passData(String key, String value) {
+        collectionsFragment.passData(key, value);
     }
 }

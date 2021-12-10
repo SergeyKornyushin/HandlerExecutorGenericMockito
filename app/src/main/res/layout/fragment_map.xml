@@ -1,17 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".fragments.MapsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_maps_fragment"
-        android:gravity="center"
-        android:textAlignment="center"
-        />
+    <Button
+        android:id="@+id/btn_start_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/start_button"
+        app:layout_constraintBottom_toTopOf="@+id/sv_collections"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/et_operation_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/operations_et_hint"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_threads_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/threads_et_hint"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_operation_number" />
+
+    <ScrollView
+        android:id="@+id/sv_collections"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_threads_number">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_inside_collection"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+            <ProgressBar
+                android:id="@+id/pb_add_to_treeMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_treeMap"
+                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_treeMap"
+                app:layout_constraintStart_toStartOf="@+id/tv_add_to_treeMap"
+                app:layout_constraintTop_toTopOf="@+id/tv_add_to_treeMap" />
+
+            <TextView
+                android:id="@+id/tv_add_to_treeMap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:paddingVertical="10dp"
+                android:text="@string/adding_to_treemap"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_add_to_hashMap"
+                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
+                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+
+            <ProgressBar
+                android:id="@+id/pb_add_to_hashMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_hashMap"
+                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_hashMap"
+                app:layout_constraintStart_toStartOf="@+id/tv_add_to_hashMap"
+                app:layout_constraintTop_toTopOf="@+id/tv_add_to_hashMap" />
+
+            <TextView
+                android:id="@+id/tv_add_to_hashMap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:paddingVertical="10dp"
+                android:text="@string/adding_to_hashmap"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/cl_inside_collection"
+                app:layout_constraintStart_toEndOf="@id/tv_add_to_treeMap"
+                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+
+            <ProgressBar
+                android:id="@+id/pb_search_in_treeMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_search_in_treeMap"
+                app:layout_constraintEnd_toEndOf="@+id/tv_search_in_treeMap"
+                app:layout_constraintStart_toStartOf="@+id/tv_search_in_treeMap"
+                app:layout_constraintTop_toTopOf="@+id/tv_search_in_treeMap" />
+
+            <TextView
+                android:id="@+id/tv_search_in_treeMap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:paddingVertical="10dp"
+                android:text="@string/search_in_treemap"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_search_in_hashMap"
+                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
+                app:layout_constraintTop_toBottomOf="@id/tv_add_to_hashMap" />
+
+            <ProgressBar
+                android:id="@+id/pb_search_in_hashMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_search_in_hashMap"
+                app:layout_constraintEnd_toEndOf="@+id/tv_search_in_hashMap"
+                app:layout_constraintStart_toStartOf="@+id/tv_search_in_hashMap"
+                app:layout_constraintTop_toTopOf="@+id/tv_search_in_hashMap" />
+
+            <TextView
+                android:id="@+id/tv_search_in_hashMap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:paddingVertical="10dp"
+                android:text="@string/search_in_hashmap"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/cl_inside_collection"
+                app:layout_constraintStart_toEndOf="@id/tv_search_in_treeMap"
+                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_hashMap" />
+
+            <ProgressBar
+                android:id="@+id/pb_remove_from_treeMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_from_treeMap"
+                app:layout_constraintEnd_toEndOf="@+id/tv_remove_from_treeMap"
+                app:layout_constraintStart_toStartOf="@+id/tv_remove_from_treeMap"
+                app:layout_constraintTop_toTopOf="@+id/tv_remove_from_treeMap" />
+
+            <TextView
+                android:id="@+id/tv_remove_from_treeMap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:paddingVertical="10dp"
+                android:text="@string/removing_from_treemap"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/tv_remove_from_hashMap"
+                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_in_hashMap" />
+
+            <ProgressBar
+                android:id="@+id/pb_remove_from_hashMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_from_hashMap"
+                app:layout_constraintEnd_toEndOf="@+id/tv_remove_from_hashMap"
+                app:layout_constraintStart_toStartOf="@+id/tv_remove_from_hashMap"
+                app:layout_constraintTop_toTopOf="@+id/tv_remove_from_hashMap" />
+
+            <TextView
+                android:id="@+id/tv_remove_from_hashMap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:paddingVertical="10dp"
+                android:text="@string/removing_from_hashmap"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/cl_inside_collection"
+                app:layout_constraintStart_toEndOf="@id/tv_remove_from_treeMap"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_in_hashMap" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

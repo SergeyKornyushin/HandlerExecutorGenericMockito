@@ -1,26 +1,42 @@
 package com.example.task2.view_models.main_operations;
 
-import static com.example.task2.view_models.ListsFragmentViewModel.syn;
+import android.os.Handler;
 
 import java.util.List;
+import java.util.Map;
 
-public abstract class Operation<T extends List> {
+public abstract class Operation<T> implements Runnable {
 
-    public String calculate(T collection){
+    public Operation(List list, Handler handler) {
+    }
 
-        synchronized (syn){
-            try {
-                syn.wait(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            double timeStart = System.nanoTime();
+    public Operation(Map map, Handler handler) {
+    }
 
-            operation(collection);
+    public Operation() {
+    }
 
-            return ((System.nanoTime() - timeStart) / 1_000_000.0)+"";
-        }
+    public Handler handler;
+    public List list;
 
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+
+    public void setList(List list){
+        this.list = list;
+    }
+
+    public String calculate(T collection) {
+
+        double timeStart = System.nanoTime();
+
+        operation(collection);
+
+        double timeEnd = System.nanoTime();
+
+
+        return ((timeEnd - timeStart) / 1_000_000.0) + "";
     }
 
     public abstract void operation(T collection);
