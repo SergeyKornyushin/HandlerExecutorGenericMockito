@@ -1,5 +1,7 @@
 package com.example.task2.adapter;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -7,10 +9,19 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.task2.fragments.CollectionsFragment;
-import com.example.task2.fragments.IMainActivity;
 import com.example.task2.fragments.MapsFragment;
 
-public class FragmentAdapter extends FragmentStateAdapter implements IMainActivity {
+public class FragmentAdapter extends FragmentStateAdapter {
+
+    public void setMapsFragment(MapsFragment mapsFragment) {
+        this.mapsFragment = mapsFragment;
+    }
+
+    public void setCollectionsFragment(CollectionsFragment collectionsFragment) {
+        this.collectionsFragment = collectionsFragment;
+    }
+
+    MapsFragment mapsFragment;
     CollectionsFragment collectionsFragment;
 
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
@@ -22,8 +33,10 @@ public class FragmentAdapter extends FragmentStateAdapter implements IMainActivi
     public Fragment createFragment(int position) {
 
         if (position == 1) {
-            return new MapsFragment();
-        } else return new CollectionsFragment();
+            return mapsFragment;
+        } else {
+            return collectionsFragment;
+        }
     }
 
     @Override
@@ -31,8 +44,4 @@ public class FragmentAdapter extends FragmentStateAdapter implements IMainActivi
         return 2;
     }
 
-    @Override
-    public void passData(String key, String value) {
-        collectionsFragment.passData(key, value);
-    }
 }

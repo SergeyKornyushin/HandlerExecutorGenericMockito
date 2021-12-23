@@ -1,13 +1,11 @@
 package com.example.task2.view_models.main_operations;
 
-import android.os.Handler;
-
 import java.util.Map;
 
 public class CreateMaps<T extends Map> extends Operation implements Runnable {
 
-    public CreateMaps(Map map, Handler handler) {
-        super(map, handler);
+    public CreateMaps(Map map) {
+        super(map);
     }
 
     public CreateMaps() {
@@ -17,19 +15,12 @@ public class CreateMaps<T extends Map> extends Operation implements Runnable {
     public void operation(Object collection) {
     }
 
-
-    public void createMap(T map, double size) {
+    public void createMap(T map, int size) {
         if (map.size() < size - 100) {
-
             map.clear();
-            for (double i = 0; i < size; i++) {
+            for (int i = 0; i < size; i++) {
                 map.put(i, "" + i);
             }
-
         }
-    }
-
-    @Override
-    public void run() {
     }
 }

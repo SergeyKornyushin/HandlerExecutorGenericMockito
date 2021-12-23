@@ -1,26 +1,40 @@
-/*
 package com.example.task2.view_models.operations_with_lists;
 
-import static com.example.task2.fragments.NonUIFragment.arrayList;
+import static com.example.task2.view_models.VariableStorage.*;
 
 import com.example.task2.view_models.main_operations.CreateLists;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RemoveEndList extends CreateLists {
 
+    public RemoveEndList(List list) {
+        super(list);
+        setList(list);
+    }
+
     @Override
     public void run() {
-
-//        LiveDataVariablesViewModel.removeEndListResult.postValue("Removing from end of ArrayList: \n"
-//                + calculate(arrayList) + " ms");
+        super.run();
     }
 
     @Override
-    public void operation(List collection) {
-        collection.remove(collection.size() - 1);
-//            Log.i("test4", "6. RemoveEndArrayList: " + Thread.currentThread().getName());
+    public void calculate(Object collection) {
+        if (list instanceof ArrayList) {
+            key = REMOVE_END_ARRAYLIST;
+        } else if (list instanceof LinkedList) {
+            key = REMOVE_END_LINKEDLIST;
+        } else {
+            key = REMOVE_END_COW_ARRAYLIST;
+        }
+        super.calculate(list);
     }
 
+    @Override
+    public void operation(Object collection) {
+        List list = (List) collection;
+        list.remove(list.size() - 1);
+    }
 }
-*/

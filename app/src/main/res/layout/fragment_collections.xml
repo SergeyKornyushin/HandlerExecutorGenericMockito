@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -43,467 +44,182 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_threads_number">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_inside_collection"
+        <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"
+            app:columnCount="3"
+            app:rowCount="7">
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_start_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_start_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_start_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_start_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_start_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_start_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_start_in_arraylist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_start_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toTopOf="@+id/pb_add_to_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/pb_add_to_start_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_start_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_start_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_start_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_start_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_start_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_start_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_start_in_linkedlist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_start_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_start_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/pb_add_to_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/pb_add_to_start_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_start_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_start_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_start_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_start_cow_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_start_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_start_in_copyonwritearraylist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_start_linkedlist"
-                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_middle_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_middle_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_middle_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_middle_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_middle_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_middle_of_arraylist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_middle_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_middle_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_middle_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_middle_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_middle_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_middle_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_middle_of_linkedlist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_middle_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_middle_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_middle_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_middle_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_middle_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_middle_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_middle_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_middle_of_copyonwritearraylist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_middle_linkedlist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_start_cow_arraylist" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_end_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_end_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_end_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_end_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_end_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_end_of_arraylist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_end_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_end_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_end_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_end_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_end_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_end_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_end_of_linkedlist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_end_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_end_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_end_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_end_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_end_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_end_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_end_cow_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_end_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/adding_to_end_of_copyonwritearraylist_tv"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_end_linkedlist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_middle_cow_arraylist" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_search_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_search_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_search_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_search_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_search_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/search_in_arraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_search_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_search_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_search_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_search_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_search_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_search_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/search_in_linkedlist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_search_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_search_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_search_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_search_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_search_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_search_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_cow_arraylist" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_search_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/search_in_copyonwritearraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_search_linkedlist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_end_cow_arraylist" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_start_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_start_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_start_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_start_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_start_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_start_of_arraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_start_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_start_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_start_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_start_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_start_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_start_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_start_of_linkedlist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_start_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_start_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_start_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_start_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_start_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_start_cow_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_start_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_start_of_copyonwritearraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_start_linkedlist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_cow_arraylist" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_middle_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_middle_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_middle_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_middle_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_middle_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_middle_of_arraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_middle_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_middle_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_middle_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_middle_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_middle_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_middle_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_middle_of_linkedlist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_middle_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_middle_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_middle_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_middle_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_middle_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_middle_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_middle_cow_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_middle_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_middle_of_copyonwritearraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_middle_linkedlist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_start_cow_arraylist" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_end_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_end_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_end_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_end_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_end_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_end_of_arraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_end_linkedlist"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_end_linkedlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_end_linkedlist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_end_linkedlist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_end_linkedlist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_linkedlist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_end_linkedlist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_end_of_linkedlist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_end_cow_arraylist"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_end_arraylist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_cow_arraylist"/>
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_end_cow_arraylist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_end_cow_arraylist"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_end_cow_arraylist"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_end_cow_arraylist"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_end_cow_arraylist"/>
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_end_cow_arraylist"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/removing_from_end_of_copyonwritearraylist"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_end_linkedlist"
-                app:layout_constraintTop_toBottomOf="@+id/tv_remove_middle_cow_arraylist" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.gridlayout.widget.GridLayout>
 
 
     </ScrollView>

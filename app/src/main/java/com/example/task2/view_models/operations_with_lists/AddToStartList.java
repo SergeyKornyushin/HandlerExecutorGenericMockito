@@ -1,8 +1,6 @@
 package com.example.task2.view_models.operations_with_lists;
 
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
+import static com.example.task2.view_models.VariableStorage.*;
 
 import com.example.task2.view_models.main_operations.CreateLists;
 
@@ -12,34 +10,26 @@ import java.util.List;
 
 public class AddToStartList extends CreateLists {
 
-    public AddToStartList(List list, Handler handler) {
-        super(list, handler);
-        setHandler(handler);
+    public AddToStartList(List list) {
+        super(list);
         setList(list);
     }
 
     @Override
     public void run() {
-        Message msg;
+        super.run();
+    }
 
-        if (list instanceof ArrayList){
-            String result = "Adding to start of ArrayList: \n"
-                    + calculate(list) + " ms";
-            msg = handler.obtainMessage(1, result);
-            handler.sendMessage(msg);
-        } else if (list instanceof LinkedList){
-            String result = "Adding to start of LinkedList: \n"
-                    + calculate(list) + " ms";
-            msg = handler.obtainMessage(11, result);
-            handler.sendMessage(msg);
+    @Override
+    public void calculate(Object collection) {
+        if (list instanceof ArrayList) {
+            key = ADD_TO_START_ARRAYLIST;
+        } else if (list instanceof LinkedList) {
+            key = ADD_TO_START_LINKEDLIST;
         } else {
-            String result = "Adding to start of CopyOnWriteArrayList: \n"
-                    + calculate(list) + " ms";
-            msg = handler.obtainMessage(21, result);
-            handler.sendMessage(msg);
+            key = ADD_TO_START_COW_ARRAYLIST;
         }
-
-
+        super.calculate(list);
     }
 
     @Override
@@ -47,6 +37,4 @@ public class AddToStartList extends CreateLists {
         List list = (List) collection;
         list.add(0, "123");
     }
-
-
 }

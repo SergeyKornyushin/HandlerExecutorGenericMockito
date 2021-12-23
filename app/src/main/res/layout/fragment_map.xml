@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/operations_et_hint"
-        app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_maps"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/threads_et_hint"
-        app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_maps"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_operation_number" />
 
@@ -44,146 +44,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_threads_number">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_inside_collection"
+        <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"
+            app:columnCount="2"
+            app:rowCount="3">
 
-
-            <ProgressBar
-                android:id="@+id/pb_add_to_treeMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_treeMap"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_treeMap"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_treeMap"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_treeMap" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_treeMap"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:paddingVertical="10dp"
-                android:text="@string/adding_to_treemap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_add_to_hashMap"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_add_to_hashMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_add_to_hashMap"
-                app:layout_constraintEnd_toEndOf="@+id/tv_add_to_hashMap"
-                app:layout_constraintStart_toStartOf="@+id/tv_add_to_hashMap"
-                app:layout_constraintTop_toTopOf="@+id/tv_add_to_hashMap" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_add_to_hashMap"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:paddingVertical="10dp"
-                android:text="@string/adding_to_hashmap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_add_to_treeMap"
-                app:layout_constraintTop_toTopOf="@id/cl_inside_collection" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_search_in_treeMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_in_treeMap"
-                app:layout_constraintEnd_toEndOf="@+id/tv_search_in_treeMap"
-                app:layout_constraintStart_toStartOf="@+id/tv_search_in_treeMap"
-                app:layout_constraintTop_toTopOf="@+id/tv_search_in_treeMap" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_search_in_treeMap"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:paddingVertical="10dp"
-                android:text="@string/search_in_treemap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_search_in_hashMap"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@id/tv_add_to_hashMap" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_search_in_hashMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_search_in_hashMap"
-                app:layout_constraintEnd_toEndOf="@+id/tv_search_in_hashMap"
-                app:layout_constraintStart_toStartOf="@+id/tv_search_in_hashMap"
-                app:layout_constraintTop_toTopOf="@+id/tv_search_in_hashMap" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_search_in_hashMap"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:paddingVertical="10dp"
-                android:text="@string/search_in_hashmap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_search_in_treeMap"
-                app:layout_constraintTop_toBottomOf="@+id/tv_add_to_hashMap" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_from_treeMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_from_treeMap"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_from_treeMap"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_from_treeMap"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_from_treeMap" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_from_treeMap"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:paddingVertical="10dp"
-                android:text="@string/removing_from_treemap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@id/tv_remove_from_hashMap"
-                app:layout_constraintStart_toStartOf="@id/cl_inside_collection"
-                app:layout_constraintTop_toBottomOf="@id/tv_search_in_hashMap" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-            <ProgressBar
-                android:id="@+id/pb_remove_from_hashMap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_remove_from_hashMap"
-                app:layout_constraintEnd_toEndOf="@+id/tv_remove_from_hashMap"
-                app:layout_constraintStart_toStartOf="@+id/tv_remove_from_hashMap"
-                app:layout_constraintTop_toTopOf="@+id/tv_remove_from_hashMap" />
-
-            <TextView
+            <com.example.task2.customView.TextWithPB
                 android:id="@+id/tv_remove_from_hashMap"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:paddingVertical="10dp"
-                android:text="@string/removing_from_hashmap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/cl_inside_collection"
-                app:layout_constraintStart_toEndOf="@id/tv_remove_from_treeMap"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_in_hashMap" />
+                android:gravity="center"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal"
+                app:layout_rowWeight="1" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.gridlayout.widget.GridLayout>
 
     </ScrollView>
 

@@ -1,5 +1,7 @@
 package com.example.task2.view_models.operations_with_lists;
 
+import static com.example.task2.view_models.VariableStorage.*;
+
 import android.os.Handler;
 import android.os.Message;
 
@@ -11,32 +13,26 @@ import java.util.List;
 
 public class AddToMiddleList extends CreateLists {
 
-    public AddToMiddleList(List list, Handler handler) {
-        super(list, handler);
-        setHandler(handler);
+    public AddToMiddleList(List list) {
+        super(list);
         setList(list);
     }
 
     @Override
     public void run() {
-        Message msg;
+        super.run();
+    }
 
-        if (list instanceof ArrayList){
-            String result = "Adding to middle of ArrayList: \n"
-                    + calculate(list) + " ms";
-            msg = handler.obtainMessage(2, result);
-            handler.sendMessage(msg);
-        } else if (list instanceof LinkedList){
-            String result = "Adding to middle of LinkedList: \n"
-                    + calculate(list) + " ms";
-            msg = handler.obtainMessage(12, result);
-            handler.sendMessage(msg);
+    @Override
+    public void calculate(Object collection) {
+        if (list instanceof ArrayList) {
+            key = ADD_TO_MIDDLE_ARRAYLIST;
+        } else if (list instanceof LinkedList) {
+            key = ADD_TO_MIDDLE_LINKEDLIST;
         } else {
-            String result = "Adding to middle of CopyOnWriteArrayList: \n"
-                    + calculate(list) + " ms";
-            msg = handler.obtainMessage(22, result);
-            handler.sendMessage(msg);
+            key = ADD_TO_MIDDLE_COW_ARRAYLIST;
         }
+        super.calculate(list);
     }
 
     @Override
