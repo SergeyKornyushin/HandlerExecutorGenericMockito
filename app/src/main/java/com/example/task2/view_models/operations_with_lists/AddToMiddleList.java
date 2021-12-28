@@ -2,16 +2,13 @@ package com.example.task2.view_models.operations_with_lists;
 
 import static com.example.task2.view_models.VariableStorage.*;
 
-import android.os.Handler;
-import android.os.Message;
-
-import com.example.task2.view_models.main_operations.CreateLists;
+import com.example.task2.view_models.main_operations.Operation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AddToMiddleList extends CreateLists {
+public class AddToMiddleList extends Operation {
 
     public AddToMiddleList(List list) {
         super(list);

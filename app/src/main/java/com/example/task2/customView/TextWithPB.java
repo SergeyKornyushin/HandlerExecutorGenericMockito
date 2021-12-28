@@ -1,13 +1,13 @@
 package com.example.task2.customView;
 
+import static com.example.task2.view_models.VariableStorage.NA;
+
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,13 +32,15 @@ public class TextWithPB extends FrameLayout {
         progressBar.setVisibility(INVISIBLE);
     }
 
-    public void setText(String s) {
-        textView.setText(s);
+    public void setResult(String result) {
+        textView.setText(result);
+        progressBar.setVisibility(INVISIBLE);
     }
 
     public void setPBVisibility(Boolean visibility) {
-        if (visibility == true) {
+        if (visibility) {
             progressBar.setVisibility(VISIBLE);
+            textView.setText(NA);
         } else {
             progressBar.setVisibility(INVISIBLE);
         }

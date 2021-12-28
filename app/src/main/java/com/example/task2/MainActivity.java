@@ -1,9 +1,14 @@
 package com.example.task2;
 
+import static com.example.task2.view_models.VariableStorage.*;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.task2.adapter.FragmentAdapter;
 import com.example.task2.databinding.ActivityMainBinding;
@@ -12,9 +17,10 @@ import com.example.task2.fragments.MapsFragment;
 import com.example.task2.fragments.NonUIFragment;
 import com.example.task2.fragments.NonUIToActivityInterface;
 import com.example.task2.fragments.UIToActivityInterface;
-import com.example.task2.view_models.main_operations.CreateLists;
+import com.example.task2.view_models.main_operations.Operation;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -58,25 +64,57 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void passDataFromUI(List list, int collectionSize) {
-        try {
-            if (list.size() == 6) {
-                nonUIFragment.startMapsOp(list, collectionSize);
-            } else {
-                nonUIFragment.startCollectionsOp(list, collectionSize);
-            }
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+    public void passListOperationsFromUI(List<Operation> list) throws ExecutionException, InterruptedException {
+        nonUIFragment.startOperations(list);
+    }
+
+    @Override
+    public void startCreateCollectionOrMap(int collectionOrMapTag, int collectionSize, int numberOfThreads)
+            throws ExecutionException, InterruptedException{
+        nonUIFragment.createCollectionsAndMaps(collectionOrMapTag, collectionSize, numberOfThreads);
+    }
+
+    @Override
+    public void requestResultsForUI(int collectionOrMap) {
+        nonUIFragment.getResultsForUI(collectionOrMap);
+    }
+
+    @Override
+    public void passResultsMapToUI(int fragmentTag, HashMap<Integer, String> resultsMap) {
+        if (fragmentTag == COLLECTIONS_TAG){
+            collectionsFragment.setTextFromMap(resultsMap);
+        } else {
+            mapsFragment.setTextFromMap(resultsMap);
         }
     }
 
     @Override
-    public void passDataFromNonUIToCollectionFragment(int key, String value) {
-        collectionsFragment.setTextViewResults(key, value);
+    public void passDataFromNonUIToUIFragment(int fragmentTag, int widgetTag, String value) {
+        if (fragmentTag == COLLECTIONS_TAG){
+            collectionsFragment.setTextViewResults(widgetTag, value);
+        } else {
+            mapsFragment.setTextViewResults(widgetTag, value);
+        }
     }
 
     @Override
-    public void passDataFromNonUIToMapsFragment(int key, String value) {
-        mapsFragment.setTextViewResults(key, value);
+    public void passInfoAboutFilling(int tag) {
+        switch (tag) {
+            case ARRAYLIST_IS_READY:
+                collectionsFragment.getCollection(ARRAYLIST_IS_READY);
+                break;
+            case LINKEDLIST_IS_READY:
+                collectionsFragment.getCollection(LINKEDLIST_IS_READY);
+                break;
+            case COW_ARRAYLIST_IS_READY:
+                collectionsFragment.getCollection(COW_ARRAYLIST_IS_READY);
+                break;
+            case HASHMAP_IS_READY:
+                mapsFragment.getMap(HASHMAP_IS_READY);
+                break;
+            case TREEMAP_IS_READY:
+                mapsFragment.getMap(TREEMAP_IS_READY);
+                break;
+        }
     }
 }

@@ -2,13 +2,13 @@ package com.example.task2.view_models.operations_with_lists;
 
 import static com.example.task2.view_models.VariableStorage.*;
 
-import com.example.task2.view_models.main_operations.CreateMaps;
+import com.example.task2.view_models.main_operations.Operation;
 
 import java.util.HashMap;
 
 import java.util.Map;
 
-public class SearchInMap extends CreateMaps {
+public class SearchInMap extends Operation {
 
     public SearchInMap(Map map) {
         super(map);

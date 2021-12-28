@@ -2,13 +2,15 @@ package com.example.task2.view_models.operations_with_lists;
 
 import static com.example.task2.view_models.VariableStorage.*;
 
-import com.example.task2.view_models.main_operations.CreateLists;
+import android.util.Log;
+
+import com.example.task2.view_models.main_operations.Operation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SearchInList extends CreateLists {
+public class SearchInList extends Operation {
 
     public SearchInList(List list) {
         super(list);

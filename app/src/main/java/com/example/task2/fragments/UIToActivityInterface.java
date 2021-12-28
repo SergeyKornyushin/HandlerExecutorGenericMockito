@@ -1,7 +1,14 @@
 package com.example.task2.fragments;
 
+import com.example.task2.view_models.main_operations.Operation;
+
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface UIToActivityInterface {
-    void passDataFromUI(List list, int collectionSize);
+    void passListOperationsFromUI(List<Operation> list)
+            throws ExecutionException, InterruptedException;
+    void startCreateCollectionOrMap(int collectionOrMap, int collectionSize, int numberOfThreads)
+            throws ExecutionException, InterruptedException;
+    void requestResultsForUI(int collectionOrMap);
 }

@@ -2,13 +2,13 @@ package com.example.task2.view_models.operations_with_lists;
 
 import static com.example.task2.view_models.VariableStorage.*;
 
-import com.example.task2.view_models.main_operations.CreateLists;
+import com.example.task2.view_models.main_operations.Operation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RemoveEndList extends CreateLists {
+public class RemoveEndList extends Operation {
 
     public RemoveEndList(List list) {
         super(list);
@@ -35,6 +35,6 @@ public class RemoveEndList extends CreateLists {
     @Override
     public void operation(Object collection) {
         List list = (List) collection;
-        list.remove(list.size() - 1);
+        list.remove(list.size()-3);
     }
 }

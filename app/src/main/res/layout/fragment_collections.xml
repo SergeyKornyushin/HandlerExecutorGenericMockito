@@ -22,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/operations_et_hint"
+        android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/threads_et_hint"
+        android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/btn_start_collections"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_operation_number" />
@@ -45,6 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_threads_number">
 
         <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/grd_collection"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="fill"

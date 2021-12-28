@@ -18,31 +18,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.task2.customView.TextWithPB;
 import com.example.task2.databinding.FragmentMapBinding;
-import com.example.task2.view_models.main_operations.CreateMaps;
-import com.example.task2.view_models.operations_with_lists.AddToMap;
-import com.example.task2.view_models.operations_with_lists.RemoveFromMap;
-import com.example.task2.view_models.operations_with_lists.SearchInMap;
+import com.example.task2.view_models.main_operations.Operation;
+import com.example.task2.view_models.operations_with_lists.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class MapsFragment extends Fragment {
     private FragmentMapBinding fragmentMBinding;
-    UIToActivityInterface uIInterface;
-    private List<CreateMaps> innerListOfClasses;
+    private UIToActivityInterface uIInterface;
+    private List<Operation> listReadyOperations;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        innerListOfClasses = Arrays.asList(
-                new AddToMap(hashMap),
-                new AddToMap(treeMap),
-                new SearchInMap(hashMap),
-                new SearchInMap(treeMap),
-                new RemoveFromMap(hashMap),
-                new RemoveFromMap(treeMap)
+    }
+
+    public void getMap(int tag) {
+        Map tempMap;
+        if (tag == TREEMAP_IS_READY) {
+            tempMap = treeMap;
+        } else {
+            tempMap = hashMap;
+        }
+        listReadyOperations = Arrays.asList(
+                new AddToMap(tempMap),
+                new SearchInMap(tempMap),
+                new RemoveFromMap(tempMap)
         );
+        try {
+            uIInterface.passListOperationsFromUI(listReadyOperations);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -56,6 +69,15 @@ public class MapsFragment extends Fragment {
                              Bundle savedInstanceState) {
         fragmentMBinding = FragmentMapBinding.inflate(getLayoutInflater());
 
+        fragmentMBinding.tvAddToTreeMap.setTag(ADDING_TO_TREEMAP);
+        fragmentMBinding.tvAddToHashMap.setTag(ADDING_TO_HASHMAP);
+        fragmentMBinding.tvSearchInTreeMap.setTag(SEARCH_IN_TREEMAP);
+        fragmentMBinding.tvSearchInHashMap.setTag(SEARCH_IN_HASHMAP);
+        fragmentMBinding.tvRemoveFromTreeMap.setTag(REMOVE_FROM_TREEMAP);
+        fragmentMBinding.tvRemoveFromHashMap.setTag(REMOVE_FROM_HASHMAP);
+
+            uIInterface.requestResultsForUI(MAPS_TAG);
+
         return fragmentMBinding.getRoot();
     }
 
@@ -64,56 +86,52 @@ public class MapsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         fragmentMBinding.btnStartMaps.setOnClickListener(view1 -> {
             workingWithPBUI();
-            int collectionSize;
-            if (fragmentMBinding.etOperationNumber.getText().toString().equals("")) {
-                collectionSize = 100000;
-                Toast.makeText(getContext(), "Default Maps Size = 100000", Toast.LENGTH_SHORT).show();
-            } else {
-                collectionSize = Integer.parseInt(fragmentMBinding.etOperationNumber.getText().toString());
+            if (fragmentMBinding.etThreadsNumber.getText().toString().equals("")) {
+                fragmentMBinding.etThreadsNumber.setText(DEFAULT_NUMBER_OF_THREADS);
             }
-            uIInterface.passDataFromUI(innerListOfClasses, collectionSize);
+            if (fragmentMBinding.etOperationNumber.getText().toString().equals("")) {
+                fragmentMBinding.etOperationNumber.setText(DEFAULT_COLLECTION_SIZE);
+            }
+            try {
+                uIInterface.startCreateCollectionOrMap(MAPS_TAG,
+                        Integer.parseInt(fragmentMBinding.etOperationNumber.getText().toString()),
+                        Integer.parseInt(fragmentMBinding.etThreadsNumber.getText().toString()));
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
         });
     }
 
     private void workingWithPBUI() {
-        fragmentMBinding.tvAddToHashMap.setPBVisibility(true);
-        fragmentMBinding.tvAddToTreeMap.setPBVisibility(true);
-        fragmentMBinding.tvSearchInHashMap.setPBVisibility(true);
-        fragmentMBinding.tvSearchInTreeMap.setPBVisibility(true);
-        fragmentMBinding.tvRemoveFromHashMap.setPBVisibility(true);
-        fragmentMBinding.tvRemoveFromTreeMap.setPBVisibility(true);
+        for (int i = 0; i <= fragmentMBinding.grdMap.getChildCount(); i++) {
+            if (fragmentMBinding.grdMap.getChildAt(i) instanceof TextWithPB) {
+                ((TextWithPB) fragmentMBinding.grdMap.getChildAt(i)).setPBVisibility(true);
+            }
+        }
     }
 
-    public void setTextViewResults(int key, String value) {
-        switch (key) {
-            case ADDING_TO_HASHMAP:
-                fragmentMBinding.tvAddToHashMap.setText(value);
-                fragmentMBinding.tvAddToHashMap.setPBVisibility(false);
-                break;
-            case ADDING_TO_TREEMAP:
-                fragmentMBinding.tvAddToTreeMap.setText(value);
-                fragmentMBinding.tvAddToTreeMap.setPBVisibility(false);
-                break;
-            case SEARCH_IN_HASHMAP:
-                fragmentMBinding.tvSearchInHashMap.setText(value);
-                fragmentMBinding.tvSearchInHashMap.setPBVisibility(false);
-                break;
-            case SEARCH_IN_TREEMAP:
-                fragmentMBinding.tvSearchInTreeMap.setText(value);
-                fragmentMBinding.tvSearchInTreeMap.setPBVisibility(false);
-                break;
-            case REMOVE_FROM_HASHMAP:
-                fragmentMBinding.tvRemoveFromHashMap.setText(value);
-                fragmentMBinding.tvRemoveFromHashMap.setPBVisibility(false);
-                break;
-            case REMOVE_FROM_TREEMAP:
-                fragmentMBinding.tvRemoveFromTreeMap.setText(value);
-                fragmentMBinding.tvRemoveFromTreeMap.setPBVisibility(false);
-                break;
-            default:
-                Log.i("test4", "something wrong with MAPS ui: key = " + key + " value = " + value);
-                break;
+    public void setTextViewResults(int widgetTag, String value) {
+        ((TextWithPB) fragmentMBinding.grdMap
+                .findViewWithTag(widgetTag)).setResult(value);
+    }
+
+    public void setTextFromMap(HashMap<Integer, String> resultsMap) {
+        for (int i = 0; i <= fragmentMBinding.grdMap.getChildCount(); i++) {
+            if (fragmentMBinding.grdMap.getChildAt(i) instanceof TextWithPB) {
+                if (!resultsMap.containsKey(fragmentMBinding.grdMap.getChildAt(i).getTag())) {
+                    ((TextWithPB) fragmentMBinding.grdMap.getChildAt(i)).setPBVisibility(true);
+                } else {
+                    ((TextWithPB) fragmentMBinding.grdMap.getChildAt(i))
+                            .setResult(resultsMap.get(fragmentMBinding.grdMap.getChildAt(i).getTag()));
+                }
+            }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        fragmentMBinding = null;
+        super.onDestroyView();
     }
 }
 

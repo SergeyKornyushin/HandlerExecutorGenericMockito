@@ -1,6 +1,18 @@
 package com.example.task2.view_models;
 
 public class VariableStorage {
+    public static final int COLLECTIONS_TAG = 111;
+    public static final int MAPS_TAG = 222;
+
+    public static final String DEFAULT_COLLECTION_SIZE = "50000";
+    public static final String DEFAULT_NUMBER_OF_THREADS = "9";
+
+    public static final int ARRAYLIST_IS_READY = 100;
+    public static final int LINKEDLIST_IS_READY = 200;
+    public static final int COW_ARRAYLIST_IS_READY = 300;
+    public static final int HASHMAP_IS_READY = 400;
+    public static final int TREEMAP_IS_READY = 500;
+
     public static final int ADD_TO_START_ARRAYLIST = 1;
     public static final int ADD_TO_START_LINKEDLIST = 11;
     public static final int ADD_TO_START_COW_ARRAYLIST = 21;
@@ -53,11 +65,13 @@ public class VariableStorage {
     public static final String removing_from_end_linkedlist = "Removing from end of LinkedList: \n";
     public static final String removing_from_end_cow_arraylist = "Removing from end of CopyOnWriteArrayList: \n";
 
-    public static final String add_to_treemap = "Adding to TreeMap: N/A ms: \n";
+    public static final String add_to_treemap = "Adding to TreeMap: \n";
     public static final String search_in_treemap = "Search in TreeMap: \n";
     public static final String removing_from_treemap = "Removing from TreeMap: \n";
-    public static final String add_to_hashmap = "Adding to HashMap: N/A ms: \n";
+    public static final String add_to_hashmap = "Adding to HashMap: \n";
     public static final String search_in_hashmap = "Search in HashMap: \n";
     public static final String removing_from_hashmap = "Removing from HashMap: \n";
+
+    public static final String NA = "N/A";
 
 }
