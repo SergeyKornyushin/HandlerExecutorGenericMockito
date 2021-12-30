@@ -1,10 +1,12 @@
 package com.example.task2.view_models;
 
 public class VariableStorage {
-    public static final int COLLECTIONS_TAG = 111;
-    public static final int MAPS_TAG = 222;
+    public static final String COLLECTIONS_TAG = "f0";
+    public static final String MAPS_TAG = "f1";
 
-    public static final String DEFAULT_COLLECTION_SIZE = "50000";
+
+
+    public static final String DEFAULT_COLLECTION_SIZE = "20000";
     public static final String DEFAULT_NUMBER_OF_THREADS = "9";
 
     public static final int ARRAYLIST_IS_READY = 100;

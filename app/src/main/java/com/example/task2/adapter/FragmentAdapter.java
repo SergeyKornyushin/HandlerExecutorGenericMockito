@@ -21,8 +21,8 @@ public class FragmentAdapter extends FragmentStateAdapter {
         this.collectionsFragment = collectionsFragment;
     }
 
-    MapsFragment mapsFragment;
-    CollectionsFragment collectionsFragment;
+    private MapsFragment mapsFragment;
+    private CollectionsFragment collectionsFragment;
 
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
@@ -31,7 +31,6 @@ public class FragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-
         if (position == 1) {
             return mapsFragment;
         } else {
@@ -44,4 +43,9 @@ public class FragmentAdapter extends FragmentStateAdapter {
         return 2;
     }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+
+    }
 }

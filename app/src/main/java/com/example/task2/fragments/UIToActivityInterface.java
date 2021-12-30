@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 public interface UIToActivityInterface {
     void passListOperationsFromUI(List<Operation> list)
             throws ExecutionException, InterruptedException;
-    void startCreateCollectionOrMap(int collectionOrMap, int collectionSize, int numberOfThreads)
+    void startCreateCollectionOrMap(String collectionOrMap, int collectionSize, int numberOfThreads)
             throws ExecutionException, InterruptedException;
-    void requestResultsForUI(int collectionOrMap);
+    void requestResultsForUI(String collectionOrMap);
 }

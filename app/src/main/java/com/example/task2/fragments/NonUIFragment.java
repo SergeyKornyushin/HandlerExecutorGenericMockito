@@ -271,7 +271,7 @@ public class NonUIFragment extends Fragment {
         }
     }
 
-    public void createCollectionsAndMaps(int collectionOrMapTag, int collectionSize, int numberOfThreads)
+    public void createCollectionsAndMaps(String collectionOrMapTag, int collectionSize, int numberOfThreads)
             throws ExecutionException, InterruptedException {
         executorService = Executors.newFixedThreadPool(numberOfThreads);
         if (collectionOrMapTag == COLLECTIONS_TAG) {
@@ -303,7 +303,7 @@ public class NonUIFragment extends Fragment {
         super.onDestroy();
     }
 
-    public void getResultsForUI(int collectionOrMap) {
+    public void getResultsForUI(String collectionOrMap) {
         if (collectionOrMap == COLLECTIONS_TAG) {
             nonUIInterface.passResultsMapToUI(collectionOrMap, collectionsResultsMap);
         } else {

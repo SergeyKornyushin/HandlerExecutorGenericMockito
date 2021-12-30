@@ -69,19 +69,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void startCreateCollectionOrMap(int collectionOrMapTag, int collectionSize, int numberOfThreads)
-            throws ExecutionException, InterruptedException{
+    public void startCreateCollectionOrMap(String collectionOrMapTag, int collectionSize, int numberOfThreads)
+            throws ExecutionException, InterruptedException {
         nonUIFragment.createCollectionsAndMaps(collectionOrMapTag, collectionSize, numberOfThreads);
     }
 
     @Override
-    public void requestResultsForUI(int collectionOrMap) {
+    public void requestResultsForUI(String collectionOrMap) {
         nonUIFragment.getResultsForUI(collectionOrMap);
     }
 
     @Override
-    public void passResultsMapToUI(int fragmentTag, HashMap<Integer, String> resultsMap) {
-        if (fragmentTag == COLLECTIONS_TAG){
+    public void passResultsMapToUI(String fragmentTag, HashMap<Integer, String> resultsMap) {
+        setFragmentFromViewPager();
+        if (fragmentTag == COLLECTIONS_TAG) {
             collectionsFragment.setTextFromMap(resultsMap);
         } else {
             mapsFragment.setTextFromMap(resultsMap);
@@ -89,8 +90,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void passDataFromNonUIToUIFragment(int fragmentTag, int widgetTag, String value) {
-        if (fragmentTag == COLLECTIONS_TAG){
+    public void passDataFromNonUIToUIFragment(String fragmentTag, int widgetTag, String value) {
+        setFragmentFromViewPager();
+        if (fragmentTag == COLLECTIONS_TAG) {
             collectionsFragment.setTextViewResults(widgetTag, value);
         } else {
             mapsFragment.setTextViewResults(widgetTag, value);
@@ -116,5 +118,12 @@ public class MainActivity extends AppCompatActivity
                 mapsFragment.getMap(TREEMAP_IS_READY);
                 break;
         }
+    }
+
+    public void setFragmentFromViewPager() {
+        collectionsFragment = (CollectionsFragment) getSupportFragmentManager()
+                .findFragmentByTag(COLLECTIONS_TAG);
+        mapsFragment = (MapsFragment) getSupportFragmentManager()
+                .findFragmentByTag(MAPS_TAG);
     }
 }
