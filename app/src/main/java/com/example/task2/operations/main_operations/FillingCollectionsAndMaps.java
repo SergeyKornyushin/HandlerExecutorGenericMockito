@@ -1,12 +1,7 @@
-package com.example.task2.view_models.main_operations;
+package com.example.task2.operations.main_operations;
 
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,27 +23,16 @@ public class FillingCollectionsAndMaps<T> extends Operation implements Runnable 
                     list.add(i + "");
                 }
             }
-            if (list instanceof ArrayList) {
-                msg = handler.obtainMessage(ARRAYLIST_IS_READY);
-            } else if (list instanceof LinkedList) {
-                msg = handler.obtainMessage(LINKEDLIST_IS_READY);
-            } else {
-                msg = handler.obtainMessage(COW_ARRAYLIST_IS_READY);
-            }
+            msg = handler.obtainMessage(LIST_OR_MAP_IS_READY, list);
         } else {
             setMap((Map) collectionOrMap);
             if (map.size() != size){
-                Log.i("test4", "size !=: "+map.size());
                 map.clear();
                 for (int i = 0; i < size; i++) {
-                    ((Map<Integer, String>) collectionOrMap).put(i, i + "");
+                    map.put(i, i + "");
                 }
             }
-            if (map instanceof HashMap) {
-                msg = handler.obtainMessage(HASHMAP_IS_READY);
-            } else {
-                msg = handler.obtainMessage(TREEMAP_IS_READY);
-            }
+            msg = handler.obtainMessage(LIST_OR_MAP_IS_READY, map);
         }
         handler.sendMessage(msg);
     }

@@ -1,11 +1,6 @@
 package com.example.task2.fragments;
 
-import static com.example.task2.fragments.NonUIFragment.arrayList;
-import static com.example.task2.fragments.NonUIFragment.copyOnWriteArrayList;
-import static com.example.task2.fragments.NonUIFragment.hashMap;
-import static com.example.task2.fragments.NonUIFragment.linkedList;
-import static com.example.task2.fragments.NonUIFragment.treeMap;
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,38 +9,51 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.task2.customView.TextWithPB;
 import com.example.task2.databinding.FragmentCollectionsBinding;
-import com.example.task2.view_models.main_operations.Operation;
-import com.example.task2.view_models.operations_with_lists.*;
+import com.example.task2.interfaces.FragmentsGeneralMethodsInterface;
+import com.example.task2.interfaces.UIToActivityInterface;
+import com.example.task2.operations.main_operations.*;
+import com.example.task2.operations.operations_with_lists.*;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class CollectionsFragment extends Fragment {
+public class CollectionsFragment extends Fragment
+        implements FragmentsGeneralMethodsInterface {
+    public static ArrayList<String> arrayList = new ArrayList<>();
+    public static LinkedList<String> linkedList = new LinkedList<>();
+    public static CopyOnWriteArrayList<String> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
     private FragmentCollectionsBinding fragmentCBinding;
     private UIToActivityInterface uIInterface;
     private List<Operation> listReadyOperations;
+    private List<FillingCollectionsAndMaps> listOfCollections;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        listOfCollections = Arrays.asList(
+                new FillingCollectionsAndMaps(arrayList),
+                new FillingCollectionsAndMaps(linkedList),
+                new FillingCollectionsAndMaps(copyOnWriteArrayList)
+        );
     }
 
-    public void getCollection(int tag) {
+    @Override
+    public void getCollectionOrMap(Object list) {
         List tempList;
-        if (tag == ARRAYLIST_IS_READY) {
+        if (list instanceof ArrayList) {
             tempList = arrayList;
-        } else if (tag == LINKEDLIST_IS_READY) {
+        } else if (list instanceof LinkedList) {
             tempList = linkedList;
         } else {
             tempList = copyOnWriteArrayList;
@@ -59,11 +67,8 @@ public class CollectionsFragment extends Fragment {
                 new RemoveMiddleList(tempList),
                 new RemoveEndList(tempList)
         );
-        try {
-            uIInterface.passListOperationsFromUI(listReadyOperations);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        uIInterface.passListOperationsFromUI(listReadyOperations);
     }
 
     @Override
@@ -108,24 +113,23 @@ public class CollectionsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentCBinding.btnStartCollections.setOnClickListener(view1 -> {
-            workingWithPBUI();
+            setProgressBarVisibility();
             if (fragmentCBinding.etThreadsNumber.getText().toString().equals("")) {
                 fragmentCBinding.etThreadsNumber.setText(DEFAULT_NUMBER_OF_THREADS);
             }
             if (fragmentCBinding.etOperationNumber.getText().toString().equals("")) {
                 fragmentCBinding.etOperationNumber.setText(DEFAULT_COLLECTION_SIZE);
             }
-            try {
-                uIInterface.startCreateCollectionOrMap(COLLECTIONS_TAG,
-                        Integer.parseInt(fragmentCBinding.etOperationNumber.getText().toString()),
-                        Integer.parseInt(fragmentCBinding.etThreadsNumber.getText().toString()));
-            } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
-            }
+
+            uIInterface.startCreateCollectionOrMap(COLLECTIONS_TAG,
+                    Integer.parseInt(fragmentCBinding.etOperationNumber.getText().toString()),
+                    Integer.parseInt(fragmentCBinding.etThreadsNumber.getText().toString()),
+                    listOfCollections);
         });
     }
 
-    private void workingWithPBUI() {
+    @Override
+    public void setProgressBarVisibility() {
         for (int i = 0; i <= fragmentCBinding.grdCollection.getChildCount(); i++) {
             if (fragmentCBinding.grdCollection.getChildAt(i) instanceof TextWithPB) {
                 ((TextWithPB) fragmentCBinding.grdCollection.getChildAt(i)).setPBVisibility(true);
@@ -133,12 +137,14 @@ public class CollectionsFragment extends Fragment {
         }
     }
 
-    public void setTextViewResults(int widgetTag, String value) {
+    @Override
+    public void postSingleOperationResult(int widgetTag, String value) {
         ((TextWithPB) fragmentCBinding.grdCollection
                 .findViewWithTag(widgetTag)).setResult(value);
     }
 
-    public void setTextFromMap(HashMap<Integer, String> resultsMap) {
+    @Override
+    public void postBatchOperationResults(HashMap<Integer, String> resultsMap) {
         for (int i = 0; i <= fragmentCBinding.grdCollection.getChildCount(); i++) {
             if (fragmentCBinding.grdCollection.getChildAt(i) instanceof TextWithPB) {
                 if (!resultsMap.containsKey(fragmentCBinding.grdCollection.getChildAt(i).getTag())) {
@@ -157,11 +163,3 @@ public class CollectionsFragment extends Fragment {
         super.onDestroyView();
     }
 }
-
-
-
-
-
-
-
-

@@ -1,18 +1,16 @@
-package com.example.task2.view_models.operations_with_lists;
+package com.example.task2.operations.operations_with_lists;
 
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
-import android.util.Log;
-
-import com.example.task2.view_models.main_operations.Operation;
+import com.example.task2.operations.main_operations.Operation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AddToStartList extends Operation {
+public class RemoveStartList extends Operation {
 
-    public AddToStartList(List list) {
+    public RemoveStartList(List list) {
         super(list);
         setList(list);
     }
@@ -25,11 +23,11 @@ public class AddToStartList extends Operation {
     @Override
     public void calculate(Object collection) {
         if (list instanceof ArrayList) {
-            key = ADD_TO_START_ARRAYLIST;
+            key = REMOVE_BEGIN_ARRAYLIST;
         } else if (list instanceof LinkedList) {
-            key = ADD_TO_START_LINKEDLIST;
+            key = REMOVE_BEGIN_LINKEDLIST;
         } else {
-            key = ADD_TO_START_COW_ARRAYLIST;
+            key = REMOVE_BEGIN_COW_ARRAYLIST;
         }
         super.calculate(list);
     }
@@ -37,6 +35,6 @@ public class AddToStartList extends Operation {
     @Override
     public void operation(Object collection) {
         List list = (List) collection;
-        list.add(0, "123");
+        list.remove(0);
     }
 }

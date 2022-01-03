@@ -1,8 +1,8 @@
-package com.example.task2.view_models.operations_with_lists;
+package com.example.task2.operations.operations_with_maps;
 
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
-import com.example.task2.view_models.main_operations.Operation;
+import com.example.task2.operations.main_operations.Operation;
 
 import java.util.HashMap;
 

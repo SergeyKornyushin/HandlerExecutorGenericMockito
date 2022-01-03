@@ -1,6 +1,4 @@
-package com.example.task2.adapter;
-
-import android.util.Log;
+package com.example.task2.fragment_adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +10,7 @@ import com.example.task2.fragments.CollectionsFragment;
 import com.example.task2.fragments.MapsFragment;
 
 public class FragmentAdapter extends FragmentStateAdapter {
+    private static final String TAG = "test4";
 
     public void setMapsFragment(MapsFragment mapsFragment) {
         this.mapsFragment = mapsFragment;
@@ -46,6 +45,7 @@ public class FragmentAdapter extends FragmentStateAdapter {
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
-
     }
+
+
 }

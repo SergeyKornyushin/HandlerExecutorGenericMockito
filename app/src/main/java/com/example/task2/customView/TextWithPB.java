@@ -1,6 +1,6 @@
 package com.example.task2.customView;
 
-import static com.example.task2.view_models.VariableStorage.NA;
+import static com.example.task2.VariableStorage.NA;
 
 import android.content.Context;
 import android.util.AttributeSet;

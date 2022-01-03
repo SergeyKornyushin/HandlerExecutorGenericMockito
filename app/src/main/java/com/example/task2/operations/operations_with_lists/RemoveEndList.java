@@ -1,16 +1,16 @@
-package com.example.task2.view_models.operations_with_lists;
+package com.example.task2.operations.operations_with_lists;
 
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
-import com.example.task2.view_models.main_operations.Operation;
+import com.example.task2.operations.main_operations.Operation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AddToMiddleList extends Operation {
+public class RemoveEndList extends Operation {
 
-    public AddToMiddleList(List list) {
+    public RemoveEndList(List list) {
         super(list);
         setList(list);
     }
@@ -23,11 +23,11 @@ public class AddToMiddleList extends Operation {
     @Override
     public void calculate(Object collection) {
         if (list instanceof ArrayList) {
-            key = ADD_TO_MIDDLE_ARRAYLIST;
+            key = REMOVE_END_ARRAYLIST;
         } else if (list instanceof LinkedList) {
-            key = ADD_TO_MIDDLE_LINKEDLIST;
+            key = REMOVE_END_LINKEDLIST;
         } else {
-            key = ADD_TO_MIDDLE_COW_ARRAYLIST;
+            key = REMOVE_END_COW_ARRAYLIST;
         }
         super.calculate(list);
     }
@@ -35,6 +35,6 @@ public class AddToMiddleList extends Operation {
     @Override
     public void operation(Object collection) {
         List list = (List) collection;
-        list.add(list.size() / 2, "123");
+        list.remove(list.size()-3);
     }
 }

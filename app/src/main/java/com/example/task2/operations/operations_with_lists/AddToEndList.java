@@ -1,18 +1,16 @@
-package com.example.task2.view_models.operations_with_lists;
+package com.example.task2.operations.operations_with_lists;
 
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
-import android.util.Log;
-
-import com.example.task2.view_models.main_operations.Operation;
+import com.example.task2.operations.main_operations.Operation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SearchInList extends Operation {
+public class AddToEndList extends Operation {
 
-    public SearchInList(List list) {
+    public AddToEndList(List list) {
         super(list);
         setList(list);
     }
@@ -25,11 +23,11 @@ public class SearchInList extends Operation {
     @Override
     public void calculate(Object collection) {
         if (list instanceof ArrayList) {
-            key = SEARCH_IN_ARRAYLIST;
+            key = ADD_TO_END_ARRAYLIST;
         } else if (list instanceof LinkedList) {
-            key = SEARCH_IN_LINKEDLIST;
+            key = ADD_TO_END_LINKEDLIST;
         } else {
-            key = SEARCH_IN_COW_ARRAYLIST;
+            key = ADD_TO_END_COW_ARRAYLIST;
         }
         super.calculate(list);
     }
@@ -37,6 +35,6 @@ public class SearchInList extends Operation {
     @Override
     public void operation(Object collection) {
         List list = (List) collection;
-        list.contains("123");
+        list.add(list.size()-3, "123");
     }
 }

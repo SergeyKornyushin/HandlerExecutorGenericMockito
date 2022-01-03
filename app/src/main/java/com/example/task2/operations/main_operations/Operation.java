@@ -1,4 +1,4 @@
-package com.example.task2.view_models.main_operations;
+package com.example.task2.operations.main_operations;
 
 import android.os.Handler;
 import android.os.Message;

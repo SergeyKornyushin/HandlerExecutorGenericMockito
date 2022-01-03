@@ -1,15 +1,15 @@
-package com.example.task2.view_models.operations_with_lists;
+package com.example.task2.operations.operations_with_maps;
 
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
-import com.example.task2.view_models.main_operations.Operation;
+import com.example.task2.operations.main_operations.Operation;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RemoveFromMap extends Operation {
+public class AddToMap extends Operation {
 
-    public RemoveFromMap(Map map) {
+    public AddToMap(Map map) {
         super(map);
         setMap(map);
     }
@@ -17,9 +17,9 @@ public class RemoveFromMap extends Operation {
     @Override
     public void calculate(Object collection) {
         if (map instanceof HashMap) {
-            key = REMOVE_FROM_HASHMAP;
+            key = ADDING_TO_HASHMAP;
         } else {
-            key = REMOVE_FROM_TREEMAP;
+            key = ADDING_TO_TREEMAP;
         }
         super.calculate(map);
     }
@@ -32,6 +32,6 @@ public class RemoveFromMap extends Operation {
     @Override
     public void operation(Object collection) {
         Map map = (Map) collection;
-        map.remove(123);
+        map.put(map.size(), "123");
     }
 }

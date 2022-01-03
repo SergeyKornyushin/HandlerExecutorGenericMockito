@@ -1,9 +1,6 @@
 package com.example.task2.fragments;
 
-import static com.example.task2.fragments.NonUIFragment.hashMap;
-import static com.example.task2.fragments.NonUIFragment.treeMap;
-
-import static com.example.task2.view_models.VariableStorage.*;
+import static com.example.task2.VariableStorage.*;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,36 +9,45 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.task2.customView.TextWithPB;
 import com.example.task2.databinding.FragmentMapBinding;
-import com.example.task2.view_models.main_operations.Operation;
-import com.example.task2.view_models.operations_with_lists.*;
+import com.example.task2.interfaces.FragmentsGeneralMethodsInterface;
+import com.example.task2.interfaces.UIToActivityInterface;
+import com.example.task2.operations.main_operations.*;
+import com.example.task2.operations.operations_with_maps.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
+import java.util.TreeMap;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment
+        implements FragmentsGeneralMethodsInterface {
+    public static HashMap<Integer, String> hashMap = new HashMap<>();
+    public static TreeMap<Integer, String> treeMap = new TreeMap<>();
     private FragmentMapBinding fragmentMBinding;
     private UIToActivityInterface uIInterface;
     private List<Operation> listReadyOperations;
+    private List<FillingCollectionsAndMaps> listOfMaps;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        listOfMaps = Arrays.asList(
+                new FillingCollectionsAndMaps(hashMap),
+                new FillingCollectionsAndMaps(treeMap)
+        );
     }
 
-    public void getMap(int tag) {
+    @Override
+    public void getCollectionOrMap(Object map) {
         Map tempMap;
-        if (tag == TREEMAP_IS_READY) {
+        if (map instanceof TreeMap) {
             tempMap = treeMap;
         } else {
             tempMap = hashMap;
@@ -51,11 +57,8 @@ public class MapsFragment extends Fragment {
                 new SearchInMap(tempMap),
                 new RemoveFromMap(tempMap)
         );
-        try {
-            uIInterface.passListOperationsFromUI(listReadyOperations);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        uIInterface.passListOperationsFromUI(listReadyOperations);
     }
 
     @Override
@@ -76,7 +79,7 @@ public class MapsFragment extends Fragment {
         fragmentMBinding.tvRemoveFromTreeMap.setTag(REMOVE_FROM_TREEMAP);
         fragmentMBinding.tvRemoveFromHashMap.setTag(REMOVE_FROM_HASHMAP);
 
-            uIInterface.requestResultsForUI(MAPS_TAG);
+        uIInterface.requestResultsForUI(MAPS_TAG);
 
         return fragmentMBinding.getRoot();
     }
@@ -85,24 +88,22 @@ public class MapsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentMBinding.btnStartMaps.setOnClickListener(view1 -> {
-            workingWithPBUI();
+            setProgressBarVisibility();
             if (fragmentMBinding.etThreadsNumber.getText().toString().equals("")) {
                 fragmentMBinding.etThreadsNumber.setText(DEFAULT_NUMBER_OF_THREADS);
             }
             if (fragmentMBinding.etOperationNumber.getText().toString().equals("")) {
                 fragmentMBinding.etOperationNumber.setText(DEFAULT_COLLECTION_SIZE);
             }
-            try {
-                uIInterface.startCreateCollectionOrMap(MAPS_TAG,
-                        Integer.parseInt(fragmentMBinding.etOperationNumber.getText().toString()),
-                        Integer.parseInt(fragmentMBinding.etThreadsNumber.getText().toString()));
-            } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
-            }
+
+            uIInterface.startCreateCollectionOrMap(MAPS_TAG,
+                    Integer.parseInt(fragmentMBinding.etOperationNumber.getText().toString()),
+                    Integer.parseInt(fragmentMBinding.etThreadsNumber.getText().toString()),
+                    listOfMaps);
         });
     }
-
-    private void workingWithPBUI() {
+    @Override
+    public void setProgressBarVisibility() {
         for (int i = 0; i <= fragmentMBinding.grdMap.getChildCount(); i++) {
             if (fragmentMBinding.grdMap.getChildAt(i) instanceof TextWithPB) {
                 ((TextWithPB) fragmentMBinding.grdMap.getChildAt(i)).setPBVisibility(true);
@@ -110,12 +111,14 @@ public class MapsFragment extends Fragment {
         }
     }
 
-    public void setTextViewResults(int widgetTag, String value) {
+    @Override
+    public void postSingleOperationResult(int widgetTag, String value) {
         ((TextWithPB) fragmentMBinding.grdMap
                 .findViewWithTag(widgetTag)).setResult(value);
     }
 
-    public void setTextFromMap(HashMap<Integer, String> resultsMap) {
+    @Override
+    public void postBatchOperationResults(HashMap<Integer, String> resultsMap) {
         for (int i = 0; i <= fragmentMBinding.grdMap.getChildCount(); i++) {
             if (fragmentMBinding.grdMap.getChildAt(i) instanceof TextWithPB) {
                 if (!resultsMap.containsKey(fragmentMBinding.grdMap.getChildAt(i).getTag())) {
@@ -134,18 +137,3 @@ public class MapsFragment extends Fragment {
         super.onDestroyView();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
