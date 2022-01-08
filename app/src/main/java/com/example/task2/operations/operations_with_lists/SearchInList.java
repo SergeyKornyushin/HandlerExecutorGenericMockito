@@ -12,29 +12,23 @@ public class SearchInList extends Operation {
 
     public SearchInList(List list) {
         super(list);
-        setList(list);
-    }
-
-    @Override
-    public void run() {
-        super.run();
     }
 
     @Override
     public void calculate(Object collection) {
-        if (list instanceof ArrayList) {
+        if (collection instanceof ArrayList) {
             key = SEARCH_IN_ARRAYLIST;
-        } else if (list instanceof LinkedList) {
+        } else if (collection instanceof LinkedList) {
             key = SEARCH_IN_LINKEDLIST;
         } else {
             key = SEARCH_IN_COW_ARRAYLIST;
         }
-        super.calculate(list);
+        tagOfOperand = COLLECTIONS_TAG;
+        super.calculate(collection);
     }
 
     @Override
     public void operation(Object collection) {
-        List list = (List) collection;
-        list.contains("123");
+        ((List)collection).contains("123");
     }
 }

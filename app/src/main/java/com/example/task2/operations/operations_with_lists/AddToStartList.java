@@ -12,29 +12,23 @@ public class AddToStartList extends Operation {
 
     public AddToStartList(List list) {
         super(list);
-        setList(list);
-    }
-
-    @Override
-    public void run() {
-        super.run();
     }
 
     @Override
     public void calculate(Object collection) {
-        if (list instanceof ArrayList) {
+        if (collection instanceof ArrayList) {
             key = ADD_TO_START_ARRAYLIST;
-        } else if (list instanceof LinkedList) {
+        } else if (collection instanceof LinkedList) {
             key = ADD_TO_START_LINKEDLIST;
         } else {
             key = ADD_TO_START_COW_ARRAYLIST;
         }
-        super.calculate(list);
+        tagOfOperand = COLLECTIONS_TAG;
+        super.calculate(collection);
     }
 
     @Override
     public void operation(Object collection) {
-        List list = (List) collection;
-        list.add(0, "123");
+        ((List)collection).add(0, "123");
     }
 }

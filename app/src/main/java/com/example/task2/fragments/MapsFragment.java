@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,18 +47,11 @@ public class MapsFragment extends Fragment
 
     @Override
     public void getCollectionOrMap(Object map) {
-        Map tempMap;
-        if (map instanceof TreeMap) {
-            tempMap = treeMap;
-        } else {
-            tempMap = hashMap;
-        }
         listReadyOperations = Arrays.asList(
-                new AddToMap(tempMap),
-                new SearchInMap(tempMap),
-                new RemoveFromMap(tempMap)
+                new AddToMap((Map) map),
+                new SearchInMap((Map) map),
+                new RemoveFromMap((Map) map)
         );
-
         uIInterface.passListOperationsFromUI(listReadyOperations);
     }
 

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,24 +51,15 @@ public class CollectionsFragment extends Fragment
 
     @Override
     public void getCollectionOrMap(Object list) {
-        List tempList;
-        if (list instanceof ArrayList) {
-            tempList = arrayList;
-        } else if (list instanceof LinkedList) {
-            tempList = linkedList;
-        } else {
-            tempList = copyOnWriteArrayList;
-        }
         listReadyOperations = Arrays.asList(
-                new AddToStartList(tempList),
-                new AddToMiddleList(tempList),
-                new AddToEndList(tempList),
-                new SearchInList(tempList),
-                new RemoveStartList(tempList),
-                new RemoveMiddleList(tempList),
-                new RemoveEndList(tempList)
+                new AddToStartList((List) list),
+                new AddToMiddleList((List) list),
+                new AddToEndList((List) list),
+                new SearchInList((List) list),
+                new RemoveStartList((List) list),
+                new RemoveMiddleList((List) list),
+                new RemoveEndList((List) list)
         );
-
         uIInterface.passListOperationsFromUI(listReadyOperations);
     }
 

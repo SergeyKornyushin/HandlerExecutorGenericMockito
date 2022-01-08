@@ -3,8 +3,8 @@ package com.example.task2;
 import java.util.HashMap;
 
 public class VariableStorage {
-    public static final String COLLECTIONS_TAG = "f0";
-    public static final String MAPS_TAG = "f1";
+    public static final int COLLECTIONS_TAG = 100;
+    public static final int MAPS_TAG = 200;
 
     public static final String DEFAULT_COLLECTION_SIZE = "20000";
     public static final String DEFAULT_NUMBER_OF_THREADS = "9";

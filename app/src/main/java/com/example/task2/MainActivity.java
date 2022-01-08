@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void startCreateCollectionOrMap(String collectionOrMapTag,
+    public void startCreateCollectionOrMap(Integer collectionOrMapTag,
                                            int collectionSize,
                                            int numberOfThreads,
                                            List<FillingCollectionsAndMaps> listCollectionsOrMaps) {
@@ -76,12 +76,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void requestResultsForUI(String collectionOrMap) {
+    public void requestResultsForUI(Integer collectionOrMap) {
         nonUIFragment.getResultsForUI(collectionOrMap);
     }
 
     @Override
-    public void passResultsMapToUI(String fragmentTag, HashMap<Integer, String> resultsMap) {
+    public void passResultsMapToUI(Integer fragmentTag, HashMap<Integer, String> resultsMap) {
         if (fragmentTag == COLLECTIONS_TAG) {
             collectionsFragment.postBatchOperationResults(resultsMap);
         } else {
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void passDataFromNonUIToUIFragment(String fragmentTag, int widgetTag, String value) {
+    public void passDataFromNonUIToUIFragment(Integer fragmentTag, int widgetTag, String value) {
         if (fragmentTag == COLLECTIONS_TAG) {
             collectionsFragment.postSingleOperationResult(widgetTag, value);
         } else {

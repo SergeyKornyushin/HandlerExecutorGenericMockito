@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UIToActivityInterface {
     void passListOperationsFromUI(List<Operation> list);
-    void startCreateCollectionOrMap(String collectionOrMap, int collectionSize, int numberOfThreads,
+    void startCreateCollectionOrMap(Integer collectionOrMap, int collectionSize, int numberOfThreads,
                                     List<FillingCollectionsAndMaps> listCollectionsOrMaps);
-    void requestResultsForUI(String collectionOrMap);
+    void requestResultsForUI(Integer collectionOrMap);
 }

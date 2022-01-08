@@ -3,48 +3,34 @@ package com.example.task2.operations.main_operations;
 import android.os.Handler;
 import android.os.Message;
 
-import java.util.List;
-import java.util.Map;
-
 public abstract class Operation<T> implements Runnable {
 
     public Operation(T listOrMap) {
+        operand = listOrMap;
     }
 
-    public Operation() {
-    }
-
-    public T collection;
+    public T operand;
     public Handler handler;
-    public List list;
-    public Map map;
     public Message msg;
     public int key;
+    public int tagOfOperand;
 
     @Override
     public void run() {
-        calculate(collection);
+        calculate(operand);
     }
 
-    public void setList(List list) {
-        this.list = list;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
-    }
-
-    public void calculate(T collection) {
+    public void calculate(T operand) {
 
         long timeStart = System.currentTimeMillis();
 
-        operation(collection);
+        operation(operand);
 
         long timeEnd = System.currentTimeMillis() - timeStart;
 
-        msg = handler.obtainMessage(key, timeEnd);
+        msg = handler.obtainMessage(key, tagOfOperand, 99 , timeEnd);
         handler.sendMessage(msg);
     }
 
-    public abstract void operation(T collection);
+    public abstract void operation(T operand);
 }

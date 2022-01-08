@@ -12,28 +12,22 @@ public class SearchInMap extends Operation {
 
     public SearchInMap(Map map) {
         super(map);
-        setMap(map);
     }
 
     @Override
-    public void run() {
-        super.run();
-    }
-
-    @Override
-    public void calculate(Object collection) {
+    public void calculate(Object map) {
         if (map instanceof HashMap) {
             key = SEARCH_IN_HASHMAP;
         } else {
             key = SEARCH_IN_TREEMAP;
         }
+        tagOfOperand = MAPS_TAG;
         super.calculate(map);
     }
 
     @Override
-    public void operation(Object collection) {
-        Map map = (Map) collection;
-        map.containsValue("123");
+    public void operation(Object map) {
+        ((Map)map).containsValue("123");
     }
 
 
