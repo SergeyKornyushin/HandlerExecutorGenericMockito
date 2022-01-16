@@ -1,70 +1,67 @@
 package com.example.task2.fragments;
 
 import static com.example.task2.VariableStorage.*;
+import static com.example.task2.VariableStorage.DefOperationTags.*;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.task2.interfaces.NonUIToActivityInterface;
-import com.example.task2.operations.main_operations.FillingCollectionsAndMaps;
+import com.example.task2.operations.main_operations.FillingGeneral;
 import com.example.task2.operations.main_operations.Operation;
-
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NonUIFragment extends Fragment {
 
-    private final Map<Integer, HashMap<Integer, String>> allResultsMap = new HashMap<>();
+    private final Map<DefOperandTags, HashMap<DefOperationTags, String>> allResultsMap
+            = new HashMap<>();
     private NonUIToActivityInterface nonUIInterface;
     private ExecutorService executorService;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        HashMap<Integer, String> tempMap = new HashMap<>();
-        for (int i = ADD_TO_START_ARRAYLIST; i <= REMOVE_FROM_HASHMAP; i++) {
-            tempMap.put(i, NA);
+        HashMap<DefOperationTags, String> tempMap = new HashMap<>();
+        for (DefOperationTags item : DefOperationTags.values()) {
+            tempMap.put(item, NA);
         }
-        allResultsMap.put(COLLECTIONS_TAG, tempMap);
-        allResultsMap.put(MAPS_TAG, tempMap);
-
+        for (DefOperandTags operand : DefOperandTags.values()) {
+            allResultsMap.put(operand, tempMap);
+        }
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
 
-    private void passAndSaveResult(int tagOfOperand, int operationTag, String result) {
-        if (!allResultsMap.containsKey(tagOfOperand)) {
-            allResultsMap.put(tagOfOperand, new HashMap<Integer, String>() {{
-                put(operationTag, widgets_texts.get(operationTag) + result + MS);
+    private void passAndSaveResult(DefOperandTags operandTag, DefOperationTags operationTag, String result) {
+        if (!allResultsMap.containsKey(operandTag)) {
+            allResultsMap.put(operandTag, new HashMap<DefOperationTags, String>() {{
+                put(operationTag, result);
             }});
         } else {
-            allResultsMap.get(tagOfOperand)
-                    .put(operationTag, widgets_texts.get(operationTag) + result + MS);
+            Objects.requireNonNull(allResultsMap.get(operandTag)).put(operationTag, result);
         }
-        nonUIInterface.passDataFromNonUIToUIFragment(tagOfOperand,
-                operationTag, widgets_texts.get(operationTag) + result + MS);
+        nonUIInterface.passDataFromNonUIToUIFragment(operandTag, operationTag, result);
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
-            if (msg.what == LIST_OR_MAP_IS_READY) {
-                nonUIInterface.passInfoAboutFilling(msg.obj);
+            if (msg.what == OPERAND_IS_FILLING.ordinal()) {
+                startOperations((List<Operation>) msg.obj);
             } else {
-                passAndSaveResult(msg.arg1, msg.what, msg.obj.toString());
+                passAndSaveResult(DefOperandTags.values()[msg.arg1],
+                        DefOperationTags.values()[msg.what], msg.obj.toString());
             }
         }
     };
@@ -76,20 +73,21 @@ public class NonUIFragment extends Fragment {
         }
     }
 
-    public void createCollectionsAndMaps(Integer collectionOrMapTag,
-                                         int collectionSize, int numberOfThreads,
-                                         List<FillingCollectionsAndMaps> listCollectionsOrMaps) {
+    public void fillingOperand(DefOperandTags operandTag,
+                               int collectionSize, int numberOfThreads,
+                               List<FillingGeneral> listCollectionsOrMaps) {
         executorService = Executors.newFixedThreadPool(numberOfThreads);
-        allResultsMap.remove(collectionOrMapTag);
-        for (FillingCollectionsAndMaps item : listCollectionsOrMaps) {
-            item.handler = this.handler;
+        allResultsMap.remove(operandTag);
+
+        for (FillingGeneral item : listCollectionsOrMaps) {
+            item.handler = handler;
             item.size = collectionSize;
             executorService.submit(item);
         }
     }
 
-    public void getResultsForUI(Integer collectionOrMap) {
-        nonUIInterface.passResultsMapToUI(collectionOrMap, allResultsMap.get(collectionOrMap));
+    public void getResultsForUI(DefOperandTags operandTag) {
+        nonUIInterface.passResultsMapToUI(operandTag, allResultsMap.get(operandTag));
     }
 
     @Override

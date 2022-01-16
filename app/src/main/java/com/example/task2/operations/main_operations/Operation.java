@@ -1,7 +1,12 @@
 package com.example.task2.operations.main_operations;
 
+import static com.example.task2.VariableStorage.DefOperandTags.*;
+import static com.example.task2.VariableStorage.NON_USABLE_ARGUMENT;
+
 import android.os.Handler;
 import android.os.Message;
+
+import com.example.task2.VariableStorage.*;
 
 public abstract class Operation<T> implements Runnable {
 
@@ -12,8 +17,8 @@ public abstract class Operation<T> implements Runnable {
     public T operand;
     public Handler handler;
     public Message msg;
-    public int key;
-    public int tagOfOperand;
+    public DefOperationTags key;
+    public DefOperandTags tagOfOperand = COLLECTIONS_TAG;
 
     @Override
     public void run() {
@@ -28,7 +33,8 @@ public abstract class Operation<T> implements Runnable {
 
         long timeEnd = System.currentTimeMillis() - timeStart;
 
-        msg = handler.obtainMessage(key, tagOfOperand, 99 , timeEnd);
+        msg = handler.obtainMessage(key.ordinal(), tagOfOperand.ordinal(),
+                NON_USABLE_ARGUMENT, timeEnd);
         handler.sendMessage(msg);
     }
 

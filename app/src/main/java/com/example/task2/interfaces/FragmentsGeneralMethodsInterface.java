@@ -1,10 +1,11 @@
 package com.example.task2.interfaces;
 
+import com.example.task2.VariableStorage.*;
+
 import java.util.HashMap;
 
 public interface FragmentsGeneralMethodsInterface {
-    void getCollectionOrMap(Object listOrMap);
     void setProgressBarVisibility();
-    void postSingleOperationResult(int widgetTag, String value);
-    void postBatchOperationResults(HashMap<Integer, String> resultsMap);
+    void postSingleOperationResult(DefOperationTags operationTag, String result);
+    void postBatchOperationResults(HashMap<DefOperationTags, String> resultsMap);
 }

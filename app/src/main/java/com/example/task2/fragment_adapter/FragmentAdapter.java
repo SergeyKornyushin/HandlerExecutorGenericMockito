@@ -10,7 +10,6 @@ import com.example.task2.fragments.CollectionsFragment;
 import com.example.task2.fragments.MapsFragment;
 
 public class FragmentAdapter extends FragmentStateAdapter {
-    private static final String TAG = "test4";
 
     public void setMapsFragment(MapsFragment mapsFragment) {
         this.mapsFragment = mapsFragment;

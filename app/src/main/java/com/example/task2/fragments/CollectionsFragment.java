@@ -1,6 +1,8 @@
 package com.example.task2.fragments;
 
 import static com.example.task2.VariableStorage.*;
+import static com.example.task2.VariableStorage.DefOperandTags.*;
+import static com.example.task2.VariableStorage.DefOperationTags.*;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,18 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.task2.VariableStorage.*;
 import com.example.task2.customView.TextWithPB;
 import com.example.task2.databinding.FragmentCollectionsBinding;
 import com.example.task2.interfaces.FragmentsGeneralMethodsInterface;
 import com.example.task2.interfaces.UIToActivityInterface;
 import com.example.task2.operations.main_operations.*;
-import com.example.task2.operations.operations_with_lists.*;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,36 +31,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CollectionsFragment extends Fragment
         implements FragmentsGeneralMethodsInterface {
-    public static ArrayList<String> arrayList = new ArrayList<>();
-    public static LinkedList<String> linkedList = new LinkedList<>();
-    public static CopyOnWriteArrayList<String> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
+    private static final ArrayList<String> arrayList = new ArrayList<>();
+    private static final LinkedList<String> linkedList = new LinkedList<>();
+    private static final CopyOnWriteArrayList<String> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
     private FragmentCollectionsBinding fragmentCBinding;
     private UIToActivityInterface uIInterface;
-    private List<Operation> listReadyOperations;
-    private List<FillingCollectionsAndMaps> listOfCollections;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listOfCollections = Arrays.asList(
-                new FillingCollectionsAndMaps(arrayList),
-                new FillingCollectionsAndMaps(linkedList),
-                new FillingCollectionsAndMaps(copyOnWriteArrayList)
-        );
-    }
-
-    @Override
-    public void getCollectionOrMap(Object list) {
-        listReadyOperations = Arrays.asList(
-                new AddToStartList((List) list),
-                new AddToMiddleList((List) list),
-                new AddToEndList((List) list),
-                new SearchInList((List) list),
-                new RemoveStartList((List) list),
-                new RemoveMiddleList((List) list),
-                new RemoveEndList((List) list)
-        );
-        uIInterface.passListOperationsFromUI(listReadyOperations);
     }
 
     @Override
@@ -70,7 +49,7 @@ public class CollectionsFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentCBinding = FragmentCollectionsBinding.inflate(getLayoutInflater());
 
@@ -112,6 +91,11 @@ public class CollectionsFragment extends Fragment
             if (fragmentCBinding.etOperationNumber.getText().toString().equals("")) {
                 fragmentCBinding.etOperationNumber.setText(DEFAULT_COLLECTION_SIZE);
             }
+            List<FillingGeneral> listOfCollections = Arrays.asList(
+                    new FillingArrayList(arrayList),
+                    new FillingLinkedList(linkedList),
+                    new FillingCOWArrayList(copyOnWriteArrayList)
+            );
 
             uIInterface.startCreateCollectionOrMap(COLLECTIONS_TAG,
                     Integer.parseInt(fragmentCBinding.etOperationNumber.getText().toString()),
@@ -130,20 +114,21 @@ public class CollectionsFragment extends Fragment
     }
 
     @Override
-    public void postSingleOperationResult(int widgetTag, String value) {
+    public void postSingleOperationResult(DefOperationTags operationTag, String result) {
         ((TextWithPB) fragmentCBinding.grdCollection
-                .findViewWithTag(widgetTag)).setResult(value);
+                .findViewWithTag(operationTag)).setResult(widgets_texts.get(operationTag) + result + MS);
     }
 
     @Override
-    public void postBatchOperationResults(HashMap<Integer, String> resultsMap) {
+    public void postBatchOperationResults(HashMap<DefOperationTags, String> resultsMap) {
         for (int i = 0; i <= fragmentCBinding.grdCollection.getChildCount(); i++) {
             if (fragmentCBinding.grdCollection.getChildAt(i) instanceof TextWithPB) {
                 if (!resultsMap.containsKey(fragmentCBinding.grdCollection.getChildAt(i).getTag())) {
                     ((TextWithPB) fragmentCBinding.grdCollection.getChildAt(i)).setPBVisibility(true);
                 } else {
                     ((TextWithPB) fragmentCBinding.grdCollection.getChildAt(i))
-                            .setResult(resultsMap.get(fragmentCBinding.grdCollection.getChildAt(i).getTag()));
+                            .setResult(widgets_texts.get(fragmentCBinding.grdCollection.getChildAt(i).getTag())
+                                    + resultsMap.get(fragmentCBinding.grdCollection.getChildAt(i).getTag()) + MS);
                 }
             }
         }

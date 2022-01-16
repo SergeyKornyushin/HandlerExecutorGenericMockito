@@ -1,12 +1,11 @@
 package com.example.task2;
 
+import static com.example.task2.VariableStorage.DefOperandTags.*;
 import static com.example.task2.VariableStorage.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.task2.fragment_adapter.FragmentAdapter;
 import com.example.task2.databinding.ActivityMainBinding;
@@ -15,8 +14,7 @@ import com.example.task2.fragments.MapsFragment;
 import com.example.task2.fragments.NonUIFragment;
 import com.example.task2.interfaces.NonUIToActivityInterface;
 import com.example.task2.interfaces.UIToActivityInterface;
-import com.example.task2.operations.main_operations.FillingCollectionsAndMaps;
-import com.example.task2.operations.main_operations.Operation;
+import com.example.task2.operations.main_operations.FillingGeneral;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.HashMap;
@@ -24,8 +22,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements UIToActivityInterface, NonUIToActivityInterface {
-    private ActivityMainBinding activityMainBinding;
-    private FragmentAdapter fragmentAdapter;
     private NonUIFragment nonUIFragment;
     private CollectionsFragment collectionsFragment;
     private MapsFragment mapsFragment;
@@ -33,13 +29,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.example.task2.databinding.ActivityMainBinding activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
 
         collectionsFragment = new CollectionsFragment();
         mapsFragment = new MapsFragment();
 
-        fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle());
+        FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle());
         activityMainBinding.vPager.setAdapter(fragmentAdapter);
 
         fragmentAdapter.setCollectionsFragment(collectionsFragment);
@@ -62,27 +58,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void passListOperationsFromUI(List<Operation> list) {
-        nonUIFragment.startOperations(list);
-    }
-
-    @Override
-    public void startCreateCollectionOrMap(Integer collectionOrMapTag,
-                                           int collectionSize,
+    public void startCreateCollectionOrMap(DefOperandTags operandTag,
+                                           int operandSize,
                                            int numberOfThreads,
-                                           List<FillingCollectionsAndMaps> listCollectionsOrMaps) {
-        nonUIFragment.createCollectionsAndMaps(collectionOrMapTag, collectionSize,
+                                           List<FillingGeneral> listCollectionsOrMaps) {
+        nonUIFragment.fillingOperand(operandTag, operandSize,
                 numberOfThreads, listCollectionsOrMaps);
     }
 
     @Override
-    public void requestResultsForUI(Integer collectionOrMap) {
-        nonUIFragment.getResultsForUI(collectionOrMap);
+    public void requestResultsForUI(DefOperandTags operandTag) {
+        nonUIFragment.getResultsForUI(operandTag);
     }
 
     @Override
-    public void passResultsMapToUI(Integer fragmentTag, HashMap<Integer, String> resultsMap) {
-        if (fragmentTag == COLLECTIONS_TAG) {
+    public void passResultsMapToUI(DefOperandTags fragmentTag, HashMap<DefOperationTags, String> resultsMap) {
+        if (fragmentTag.equals(COLLECTIONS_TAG)) {
             collectionsFragment.postBatchOperationResults(resultsMap);
         } else {
             mapsFragment.postBatchOperationResults(resultsMap);
@@ -90,20 +81,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void passDataFromNonUIToUIFragment(Integer fragmentTag, int widgetTag, String value) {
-        if (fragmentTag == COLLECTIONS_TAG) {
-            collectionsFragment.postSingleOperationResult(widgetTag, value);
+    public void passDataFromNonUIToUIFragment(DefOperandTags fragmentTag,
+                                              DefOperationTags operationTag, String result) {
+        if (fragmentTag.equals(COLLECTIONS_TAG)) {
+            collectionsFragment.postSingleOperationResult(operationTag, result);
         } else {
-            mapsFragment.postSingleOperationResult(widgetTag, value);
-        }
-    }
-
-    @Override
-    public void passInfoAboutFilling(Object listOrMap) {
-        if (listOrMap instanceof List) {
-            collectionsFragment.getCollectionOrMap(listOrMap);
-        } else {
-            mapsFragment.getCollectionOrMap(listOrMap);
+            mapsFragment.postSingleOperationResult(operationTag, result);
         }
     }
 

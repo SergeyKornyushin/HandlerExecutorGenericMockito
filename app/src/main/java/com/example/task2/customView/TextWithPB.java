@@ -16,16 +16,14 @@ import androidx.annotation.Nullable;
 import com.example.task2.R;
 
 public class TextWithPB extends FrameLayout {
-    private TextView textView;
-    private ProgressBar progressBar;
-    private View view;
-    private LayoutInflater layoutInflater;
+    private final TextView textView;
+    private final ProgressBar progressBar;
 
     public TextWithPB(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        layoutInflater = LayoutInflater.from(context);
-        view = layoutInflater.inflate(R.layout.item_view, null);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.item_view, null);
         addView(view);
         textView = view.findViewById(R.id.tv_xml);
         progressBar = view.findViewById(R.id.pb_xml);

@@ -1,13 +1,12 @@
 package com.example.task2.interfaces;
 
-import com.example.task2.operations.main_operations.FillingCollectionsAndMaps;
-import com.example.task2.operations.main_operations.Operation;
+import com.example.task2.VariableStorage.*;
+import com.example.task2.operations.main_operations.FillingGeneral;
 
 import java.util.List;
 
 public interface UIToActivityInterface {
-    void passListOperationsFromUI(List<Operation> list);
-    void startCreateCollectionOrMap(Integer collectionOrMap, int collectionSize, int numberOfThreads,
-                                    List<FillingCollectionsAndMaps> listCollectionsOrMaps);
-    void requestResultsForUI(Integer collectionOrMap);
+    void startCreateCollectionOrMap(DefOperandTags operandTag, int operandSize, int numberOfThreads,
+                                    List<FillingGeneral> listCollectionsOrMaps);
+    void requestResultsForUI(DefOperandTags operandTag);
 }
