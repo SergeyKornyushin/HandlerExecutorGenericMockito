@@ -1,7 +1,11 @@
 package com.example.task2.operations.main_operations;
 
 import static com.example.task2.VariableStorage.DefOperationTags.*;
+
+import androidx.test.espresso.idling.CountingIdlingResource;
+
 import com.example.task2.operations.operations_with_lists.*;
+import com.example.task2.util.EspressoIdlingResource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +19,7 @@ public class FillingArrayList extends FillingGeneral {
 
     @Override
     public void run() {
+        EspressoIdlingResource.increment();
         if (arrayList.size() != size) {
             arrayList.clear();
             for (int i = 0; i < size; i++) {
@@ -31,5 +36,6 @@ public class FillingArrayList extends FillingGeneral {
                 new RemoveEndList(arrayList, REMOVE_END_ARRAYLIST)
         );
         super.run();
+        EspressoIdlingResource.decrement();
     }
 }

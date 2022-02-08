@@ -14,16 +14,20 @@ import android.os.RemoteException;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.uiautomator.UiDevice;
 
 import com.example.task2.customView.TextWithPB;
+import com.example.task2.util.EspressoIdlingResource;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -105,20 +109,28 @@ public class ExampleInstrumentedTest {
         };
     }
 
+    @Before
+    public void registerIdlingResource(){
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource);
+    }
+
+    @After
+    public void unregisterIdlingResource(){
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource);
+    }
+
     @Test
-    public void test_check_single_view() throws InterruptedException {
+    public void test_check_result_and_progressbar_displayed_on_view() {
         onView(withId(R.id.et_operation_number)).perform(clearText());
-        onView(withId(R.id.et_operation_number)).perform(typeText("2000000"),
+        onView(withId(R.id.et_operation_number)).perform(typeText("300000"),
                 closeSoftKeyboard());
 
         onView(withId(R.id.btn_start_collections)).perform(click());
 
-        onView(withProgressBarInCustomView(withId(R.id.tv_add_to_start_arraylist), ADD_TO_START_ARRAYLIST))
-                .check(matches(isDisplayed()));
-
-        Thread.sleep(1000);
-
         onView(withTextInCustomView(withId(R.id.tv_add_to_start_arraylist), ADD_TO_START_ARRAYLIST))
                 .check(matches(withSubstring(widgets_texts.get(ADD_TO_START_ARRAYLIST))));
+
+        onView(withProgressBarInCustomView(withId(R.id.tv_add_to_start_cow_arraylist), ADD_TO_START_COW_ARRAYLIST))
+                .check(matches(isDisplayed()));
     }
 }
