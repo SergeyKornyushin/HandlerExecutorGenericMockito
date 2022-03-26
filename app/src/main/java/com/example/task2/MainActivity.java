@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.example.task2.databinding.ActivityMainBinding activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
 
         collectionsFragment = new CollectionsFragment();
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void setFragmentFromViewPager2() {
+    private void setFragmentFromViewPager2() {
         if (getSupportFragmentManager().getFragments().size() > 1) {
             for (int i = 1; i < getSupportFragmentManager().getFragments().size(); i++) {
                 if (getSupportFragmentManager().getFragments().get(i) instanceof CollectionsFragment) {

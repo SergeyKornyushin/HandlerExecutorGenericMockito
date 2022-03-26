@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.task2.interfaces.NonUIToActivityInterface;
 import com.example.task2.operations.main_operations.FillingGeneral;
 import com.example.task2.operations.main_operations.Operation;
+import com.example.task2.util.EspressoIdlingResource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,7 @@ public class NonUIFragment extends Fragment {
         nonUIInterface.passDataFromNonUIToUIFragment(operandTag, operationTag, result);
     }
 
-    private final Handler handler = new Handler(Looper.getMainLooper()) {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             if (msg.what == OPERAND_IS_FILLING.ordinal()) {
                 startOperations((List<Operation>) msg.obj);
